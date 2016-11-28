@@ -13,7 +13,7 @@ export class CommonService {
         this.api_base = GlobalVariable.BASE_API_URL;
     }
 
-    constructFormHeader():RequestOptions{
+    constructFormHeader():Headers{
         var headers = new Headers();
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
         return headers;

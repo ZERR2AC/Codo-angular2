@@ -1,8 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
-import {Http, URLSearchParams, RequestOptions} from "@angular/http";
+import {Http, URLSearchParams, RequestOptions, Response} from "@angular/http";
 import {GlobalVariable} from "../global";
-import Response = ts.server.protocol.Response;
 import {Observable} from "rxjs";
 import {CommonService} from "./common.service";
 import {AuthenticationService} from "./authentication.service";
@@ -22,7 +21,7 @@ export class ChannelService {
 
     private getChannelNameWithType(type: number) {
         var params = this.commonService.userToken2params();
-        params.append('type', type);
+        params.append('type', type.toString());
         return this.http.get(this.api_base + 'channel', {search: params})
             .map((response: Response)=> {
                     var res = response.json();

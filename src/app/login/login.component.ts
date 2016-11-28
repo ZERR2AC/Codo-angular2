@@ -23,7 +23,7 @@ export class LoginComponent {
   }
 
   signToggleDidClick(): void {
-    this.isInSignup = ~this.isInSignup;
+    this.isInSignup = !this.isInSignup;
     $(".animate-container").animateCss("animated bounceIn");
   }
 

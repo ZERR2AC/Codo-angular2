@@ -32,7 +32,7 @@ export class AppDialogComponent implements OnInit,OnChanges,AfterViewChecked {
     @Output()
     isSubscribeChanged: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-    private unsubscribeChannels: Array = [];
+    private unsubscribeChannels = [];
 
     constructor(private channelService: ChannelService) {
     }
@@ -42,7 +42,7 @@ export class AppDialogComponent implements OnInit,OnChanges,AfterViewChecked {
 
 
     ngOnChanges(changes: SimpleChanges): void {
-        if (changes.visible.currentValue == true) {
+        if (changes['visible'].currentValue == true) {
             this.unsubscribeChannels = [];
             this.channelService.getUnsubscribeChannels().subscribe(
                 res=>this.unsubscribeChannels = res,

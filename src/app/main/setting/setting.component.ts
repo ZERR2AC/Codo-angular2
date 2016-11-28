@@ -15,7 +15,7 @@ export class SettingComponent implements OnInit {
     @ViewChild(ModalDialogComponent)
     public modal: ModalDialogComponent;
 
-    username: string = [];
+    username: string = "";
 
     ngOnInit(): void {
         this.getMyOwnChannels();
@@ -25,8 +25,8 @@ export class SettingComponent implements OnInit {
     }
 
     showDialog = false;
-    private myOwnchannels: Array = [];
-    private mySubcribedChannels: Array = [];
+    private myOwnchannels = [];
+    private mySubcribedChannels = [];
 
     constructor(private channelService: ChannelService,
                 private authenticationService: AuthenticationService,
