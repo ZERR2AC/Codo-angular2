@@ -1,0 +1,25 @@
+<!-- /navbar -->
+<nav class="navbar navbar-dark navbar-fixed-top animated slideInDown" role="navigation">
+    <div class="navbar-header pull-left">
+        <a class="navbar-brand" [routerLink]="['/']">Codo</a>
+    </div>
+
+    <ul class="nav navbar-nav my-nav-bar-right">
+        <li><a [routerLink]="['/setting']">subscription</a></li>
+        <li><a (click)="logout()" [routerLink]="['/login']">logout</a></li>
+
+    </ul>
+
+</nav>
+
+
+<modalDialog>
+    <div class="app-modal-header">
+        Warning
+    </div>
+</modalDialog>
+
+<div class="container">
+    <router-outlet></router-outlet>
+</div>
+

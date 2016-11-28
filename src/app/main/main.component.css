@@ -1,0 +1,122 @@
+.navbar {
+    background-color: #03A9F4;
+    border-radius: 0;
+}
+
+.container {
+    margin-top: 60px;
+    text-align: center;
+}
+
+.my-nav-bar-right {
+    float: right;
+    margin: 0 !important;
+    padding-right: 10px;
+}
+
+.navbar-nav > li > a {
+    padding: 15px 4px;
+}
+
+@media (max-width: 767px) {
+    .navbar-nav > li > a {
+        padding: 15px 4px;
+    }
+}
+
+.nav li {
+    display: inline-block;
+}
+
+.navbar > .navbar-header > a {
+    color: white;
+}
+
+.navbar > .navbar-nav a {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.navbar > .navbar-nav a:hover {
+    color: white;
+}
+
+.channel-item {
+    border-radius: 4px;
+    background-color: #03A9F4;
+    color: #ffffff;
+    font-size: 16px;
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+    overflow: hidden;
+    margin: 0 7px 7px 0;
+    line-height: 15px;
+    height: 27px;
+    padding: 6px 21px;
+    -webkit-transition: .25s linear;
+    transition: .25s linear;
+}
+
+.channels-display {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.channel-item:hover {
+    background-color: #2196F3;
+    color: #ffffff;
+}
+
+.channel-item-with-span:hover {
+    padding-right: 28px;
+    padding-left: 14px;
+}
+
+.channel-item > span {
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 17px;
+    position: absolute;
+    right: 0;
+    text-align: right;
+    text-decoration: none;
+    top: 6px;
+    width: 100%;
+    bottom: 0;
+    padding: 0 10px 0 0;
+    z-index: 2;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    -webkit-transition: opacity .25s linear;
+    transition: opacity .25s linear;
+}
+
+.channel-item-with-span:hover > span {
+    opacity: 1;
+    -webkit-filter: none;
+    filter: none;
+}
+
+.channel-item-ready-subscribed {
+    background-color: #8BC34A;
+    padding-right: 28px;
+    padding-left: 14px;
+    -webkit-filter: none;
+    filter: none;
+}
+
+.channel-item-ready-subscribed > span {
+    padding: 0 8px 0 0 !important;
+    opacity: 1;
+    -webkit-filter: none;
+    filter: none;
+    top: 5px;
+}
+
+.channel-item-ready-subscribed:hover {
+    background-color: #8BC34A;
+}

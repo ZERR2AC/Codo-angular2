@@ -1,0 +1,26 @@
+<div class="my-modal-dialog">
+
+    <div class="dialog" tabindex="-1"
+         [ngStyle]="{'display': visible ? 'block' : 'none', 'opacity': 1 }">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <ng-content select=".app-modal-header"></ng-content>
+                </div>
+                <div class="modal-body">
+                    <ng-content select=".app-modal-body"></ng-content>
+                    <p>{{content}}</p>
+                </div>
+                <div class="modal-footer">
+                    <ng-content select=".app-modal-footer"></ng-content>
+                    <button type="button" class="btn btn-primary" (click)="hide()">I know</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="visible">
+        <div class="overlay" (click)="hide()"></div>
+    </div>
+
+</div>

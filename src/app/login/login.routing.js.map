@@ -1,0 +1,1 @@
+{"version":3,"file":"login.routing.js","sourceRoot":"","sources":["login.routing.ts"],"names":[],"mappings":";AAAA,uBAAqC,iBAAiB,CAAC,CAAA;AACvD,gCAA6B,mBAAmB,CAAC,CAAA;AAEjD,IAAM,MAAM,GAAW;IACnB;QACI,IAAI,EAAE,EAAE;QACR,SAAS,EAAE,gCAAc;QACzB,QAAQ,EAAE,EACT;KACJ;CACJ,CAAC;AAGW,oBAAY,GAAG,qBAAY,CAAC,QAAQ,CAAC,MAAM,CAAC,CAAC"}

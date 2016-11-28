@@ -1,0 +1,25 @@
+<div *ngIf="visible" class="more-subscription-dialog-container">
+    <div class="more-subscription-dialog ">
+        <h4>More channels :)</h4>
+        <div class="channels-display">
+            <div *ngFor="let channel of unsubscribeChannels">
+                <div class="channel-item "
+                     [ngClass]="{'subscribed': channel.type==2,
+                     'channel-item-with-span': channel.type==0,
+                     'channel-item-ready-subscribed': channel.type==2}"
+                     (click)="toggleSubscription(channel); $event.stopPropagation()">{{channel.name}}
+                    <span *ngIf="channel.type==0" class="fa fa-plus"></span>
+                    <span *ngIf="channel.type==2" class="fa fa-check"></span>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <button class="btn btn-default btn-circle fui-cross" (click)="close()"></button>
+    </div>
+</div>
+
+<div *ngIf="visible">
+    <div class="overlay" (click)="close()"></div>
+</div>
+
+

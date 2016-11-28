@@ -1,0 +1,33 @@
+.setting-container{
+    width:90%;
+    margin:0 auto;
+    max-width: 600px;
+}
+
+.subscribe-more-button{
+    margin-top: 10px;
+    width: 100%;
+    margin-bottom: 10px;
+    border: solid 2px #03A9F4;
+    background-color: transparent;
+    color: #03A9F4;
+    font-weight: bolder;
+}
+
+.subscribe-more-button:active:focus{
+    background-color: #2196F3;
+    border-color: #2196F3;
+    color: white;
+}
+
+.subscribe-more-button:hover{
+    background-color: #2196F3;
+    border-color: #2196F3;
+    color: white;
+}
+
+#hello-info{
+    color: #03A9F4;
+    margin-bottom: 30px;
+    margin-top: 20px;
+}

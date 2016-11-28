@@ -1,0 +1,42 @@
+.login-container{
+    width: 300px;
+    height: 310px;
+    margin: auto;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+}
+
+.animate-container{
+    border: solid 0.5rem #2196F3;
+    border-radius: 1rem;
+    padding: 10px 25px 10px 25px;
+}
+
+.login-button-group{
+    margin-top: 25px;
+    margin-bottom: 7px;
+}
+
+.already-have-account{
+    font-size: 15px;
+    color: #858585;
+}
+
+.already-have-account:hover{
+    color: #9E9E9E;
+}
+
+.login-button-group .btn{
+    width: 50%;
+    max-width: 112px;
+    margin: 0 3px;
+}
+
+.btn-block{
+    width: 100% !important;
+    max-width: 1000px !important;
+}
+
+@media (min-width: 768px) {
+
+}

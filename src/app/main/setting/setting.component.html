@@ -1,0 +1,56 @@
+<div class="setting-container">
+
+    <div id="hello-info" >
+        <h3 style="display: inline">Hello,&nbsp;</h3>
+        <h1 style="display: inline;"> {{username}}</h1>
+    </div>
+
+    <div id="my-channels">
+        <h4>My channels</h4>
+        <!-- new channel -->
+        <div class="form-group has-feedback">
+            <input class="form-control" (keyup.enter)="createNewChannel($event)" placeholder="Create a channel">
+            <span class="form-control-feedback fui-plus"></span>
+        </div>
+
+        <div class="channels-display">
+            <div *ngFor="let ownChannel of myOwnchannels">
+                <div class="channel-item">{{ownChannel.name}}</div>
+            </div>
+        </div>
+
+    </div>
+
+    <hr>
+
+    <div id="my-subscribe-channels">
+        <h4>Subscribed channels</h4>
+        <div class="channels-display">
+            <div *ngFor="let channel of mySubcribedChannels">
+                <div class="channel-item channel-item-with-span" (click)="unsubscribeChannel(channel)">
+                    {{channel.name}}
+                    <span class="fa fa-remove"></span>
+                </div>
+            </div>
+        </div>
+        <button (click)="subscribeMoreBtnDidClick()" class="btn subscribe-more-button btn-default">Subscribe More
+        </button>
+        <app-dialog [(visible)]="showDialog" (isSubscribeChanged)="getMySubscribedChannels()"></app-dialog>
+    </div>
+
+    <hr>
+
+    <button class="btn btn-default btn-circle fui-cross" (click)="back()"></button>
+
+</div>
+
+
+<modalDialog>
+    <div class="app-modal-header">
+        Warning
+    </div>
+    <div class="app-modal-body">
+    </div>
+    <div class="app-modal-footer">
+    </div>
+</modalDialog>

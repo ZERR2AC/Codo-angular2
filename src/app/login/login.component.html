@@ -1,0 +1,45 @@
+<div class="login-container" >
+    <!--sign up-->
+    <div class="animate-container">
+    <div *ngIf="isInSignup">
+        <div class="form-group">
+            <label >Username</label>
+            <input type="text" name="username" [(ngModel)]="model.username"
+                   required class="form-control" placeholder="your user name">
+        </div>
+        <div class="form-group">
+            <label >Password</label>
+            <input type="password" name="password" [(ngModel)]="model.password"
+                   required class="form-control" placeholder="your password">
+        </div>
+
+        <div class="login-button-group text-center">
+            <button type="submit" class="btn btn-block btn-primary" (click)="signupSubmit()" >Submit</button>
+        </div>
+
+        <div class="text-center">
+            <a class="already-have-account" [routerLink]="[]" (click)="signToggleDidClick()">already have a account?</a>
+        </div>
+
+    </div>
+
+    <!--login-->
+    <div *ngIf="!isInSignup">
+        <div class="form-group">
+            <label >Username</label>
+            <input type="text" name="username" [(ngModel)]="model.username"
+                   required class="form-control" placeholder="your user name">
+        </div>
+        <div class="form-group">
+            <label >Password</label>
+            <input type="password" name="password" [(ngModel)]="model.password"
+                   required class="form-control" placeholder="your password">
+        </div>
+        <div class="login-button-group text-center">
+            <button type="submit" class="btn btn-primary btn-md"
+                    (click)="loginButtonDidClick()" >Login</button>
+            <button type="button" class="btn btn-default btn-md" (click)="signToggleDidClick()" > Sign Up</button>
+        </div>
+    </div>
+    </div>
+</div>
