@@ -64,8 +64,11 @@ export class SettingComponent implements OnInit {
                 event.target.value = "";
             },
             err=> {
-                console.log("can not create new channel");
-                this.modal.showWithContent("can not create new channel");
+                if (err.message == 1) {
+                    console.log("channel name has benn used.");
+                    //change the UI to show warning
+
+                }
             });
     }
 
@@ -81,11 +84,13 @@ export class SettingComponent implements OnInit {
             },
             err => {
                 // can not unsubscribe
-                console.log("fail to unsubscribe Channel");
-                this.modal.showWithContent("fail to unsubscribe Channel");
+                if (err.message == 20) {
+                    console.log("fail to unsubscribe Channel");
+                    this.modal.showWithContent("fail to unsubscribe Channel");
+                    channel.type = 2;
+                    this.mySubcribedChannels.splice(i, 0, channel);
+                }
 
-                channel.type = 2;
-                this.mySubcribedChannels.splice(i, 0, channel);
             }
         )
     }

@@ -82,8 +82,13 @@ export class AppDialogComponent implements OnInit,OnChanges,AfterViewChecked {
             res=> {
             },
             err=> {
-                console.log("can not subscribe");
-                channel.type = 0;
+                // can not subscribe
+                if (err.message == 20) {
+                    console.log("can not subscribe");
+                    channel.type = 0;
+                }
+
+
             }
         );
     }
@@ -94,9 +99,11 @@ export class AppDialogComponent implements OnInit,OnChanges,AfterViewChecked {
             res=> {
             },
             err=> {
-                console.log("can not unsubscribe");
-                channel.type = 2;
-
+                // can not subscribe
+                if (err.message == 20) {
+                    console.log("can not unsubscribe");
+                    channel.type = 2;
+                }
             }
         )
     }

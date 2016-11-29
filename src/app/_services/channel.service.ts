@@ -27,7 +27,7 @@ export class ChannelService {
                     var res = response.json();
                     if (res.ret == 0) {
                         return res.channels;
-                    } else if (res.ret == 10) {
+                    } else {
                         this.errorHandler(res.ret);
                         throw new Error(res.ret);
                     }
@@ -63,8 +63,9 @@ export class ChannelService {
             if (res.ret == 0) {
                 //OK
                 return res;
-            } else if (res.ret == 1) {
-                // channel name has been used
+            } else {
+                // ==1 channel name has been used
+                this.errorHandler(res.ret);
                 throw new Error(res.ret);
             }
         });
@@ -85,7 +86,7 @@ export class ChannelService {
             if (res.ret == 0) {
                 //OK
                 return res;
-            } else if (res.ret == 20) {
+            } else {
                 //fail
                 this.errorHandler(res.ret);
                 throw new Error(res.ret);
