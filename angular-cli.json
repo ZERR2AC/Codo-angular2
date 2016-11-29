@@ -21,7 +21,6 @@
                 "assets/css/styles.css"
             ],
             "scripts": [
-                "assets/js/jquery-1.8.1.js",
                 "assets/js/myjs.js"
             ],
             "environments": {
