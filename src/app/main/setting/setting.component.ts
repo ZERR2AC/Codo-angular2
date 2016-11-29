@@ -16,6 +16,7 @@ export class SettingComponent implements OnInit {
     public modal: ModalDialogComponent;
 
     username: string = "";
+    newChannelName: string = "";
 
     ngOnInit(): void {
         this.getMyOwnChannels();
@@ -56,12 +57,12 @@ export class SettingComponent implements OnInit {
         );
     }
 
-    createNewChannel(event: any) {
-        this.channelService.createChannel(event.target.value).subscribe(
+    createNewChannel(){
+        this.channelService.createChannel(this.newChannelName).subscribe(
             //successful create
             res=> {
                 this.myOwnchannels.push(res.channel);
-                event.target.value = "";
+                this.newChannelName = "";
             },
             err=> {
                 if (err.message == 1) {
@@ -71,7 +72,6 @@ export class SettingComponent implements OnInit {
                 }
             });
     }
-
     unsubscribeChannel(channel): void {
         channel.type = 0;
         let i = this.mySubcribedChannels.indexOf(channel);

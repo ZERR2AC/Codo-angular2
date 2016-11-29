@@ -19,9 +19,11 @@
     margin-bottom: 10px;
 }
 
-.form-control:focus > .input-group-addon{
-    background-color: #2196F3 ;
+.form-control:focus + .input-group-btn button{
+    border-color: #03abf9;
+    color: #03abf9;
 }
+
 
 .btn-circle{
     width: 50px;

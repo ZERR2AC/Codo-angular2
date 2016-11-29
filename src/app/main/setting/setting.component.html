@@ -7,10 +7,19 @@
 
     <div id="my-channels">
         <h4>My channels</h4>
+
         <!-- new channel -->
-        <div class="form-group has-feedback">
-            <input class="form-control" (keyup.enter)="createNewChannel($event)" placeholder="Create a channel">
-            <span class="form-control-feedback fui-plus"></span>
+        <div class="input-group">
+            <input type="text" class="form-control"
+                   (keyup.enter)="createNewChannel()"
+                   placeholder="Create a channel"
+                   id="search-query-3"
+                   [(ngModel)]="newChannelName">
+            <span class="input-group-btn">
+                <button type="submit" class="btn" (click)="createNewChannel()">
+                    <span class="fui-plus"></span>
+                </button>
+            </span>
         </div>
 
         <div class="channels-display">
