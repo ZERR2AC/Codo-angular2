@@ -12,7 +12,17 @@ export class ListComponent implements OnInit {
 
     date;
 
+    datepickerOpts = {
+        autoclose: true,
+        todayBtn: 'linked',
+        todayHighlight: true,
+        assumeNearbyYear: true,
+        format: 'D, d MM yyyy'
+    };
+
+
     ngOnInit(): void {
+        this.date = new Date();
         this.reminderService.getAllReminder().subscribe(
             res => {
                 this.reminders = res.reminders;

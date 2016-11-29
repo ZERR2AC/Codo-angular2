@@ -1,8 +1,3 @@
-<datetime [(ngModel)]="date"></datetime>
-My date: {{date}}
-
-<button (click)="click()">click</button>
-
 <ul style="text-align: left">
     <li *ngFor="let reminder of reminders">
         id: {{reminder.id}}
@@ -17,6 +12,15 @@ My date: {{date}}
         </ul>
     </li>
 </ul>
+
+<div >
+    <datetime [(ngModel)]="date" [datepicker]="datepickerOpts"></datetime>
+    My date: {{date}}
+</div>
+
+
+
+<button (click)="click()">click</button>
 
 
 
