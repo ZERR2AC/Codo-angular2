@@ -27,7 +27,8 @@ import {ModalDialogModule} from "../modalDialog/modalDialog.module";
     providers:[
         AuthenticationService,
         CommonService,
-        ChannelService
+        ChannelService,
+        ReminderService
     ]
 })
 
