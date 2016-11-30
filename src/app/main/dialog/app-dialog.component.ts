@@ -20,6 +20,7 @@ export class AppDialogComponent implements OnInit,OnChanges,AfterViewChecked {
     ngAfterViewChecked(): void {
         if(this.visible){
             $(".more-subscription-dialog-container").animateCss("fadeInUp");
+            this.dialogComtainer = $(".more-subscription-dialog-container");
         }
     }
 
@@ -31,6 +32,8 @@ export class AppDialogComponent implements OnInit,OnChanges,AfterViewChecked {
 
     @Output()
     isSubscribeChanged: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+    dialogComtainer;
 
     private unsubscribeChannels = [];
 
@@ -56,16 +59,15 @@ export class AppDialogComponent implements OnInit,OnChanges,AfterViewChecked {
 
         let animationName = 'fadeOutDown';
         var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
-        $(".more-subscription-dialog-container").addClass('animated ' + animationName).one(animationEnd, function () {
-            $(this).removeClass('animated ' + animationName);
-
+        this.dialogComtainer.on('animateEnd',()=>{
+            this.visible = false;
+            this.visibleChange.emit(this.visible);
         });
 
-        setTimeout(()=>{
-        this.visible = false;
-        this.visibleChange.emit(this.visible);
-        },700);
-
+        $(".more-subscription-dialog-container").addClass('animated ' + animationName).one(animationEnd, function () {
+            $(this).removeClass('animated ' + animationName);
+            $(this).trigger('animateEnd');
+        });
     }
 
     toggleSubscription(channel) {
