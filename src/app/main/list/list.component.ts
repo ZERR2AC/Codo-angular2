@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, OnInit, AfterViewChecked, AfterViewInit} from "@angular/core";
 import {ReminderService} from "../../_services/reminder.service";
 import {Reminder} from "../../_model/reminder.model";
 import {ChannelService} from "../../_services/channel.service";
@@ -10,12 +10,23 @@ declare var $: any;
     styleUrls:['list.component.css']
 })
 
-export class ListComponent implements OnInit {
+export class ListComponent implements OnInit,AfterViewInit{
+
+    ngAfterViewInit(): void {
+
+        //init new reminder due date picker
+        this.datetimepicker = $('#datetimepicker');
+        $('#datetimepicker').datetimepicker();
+        this.datetimepicker.on('dp.change',()=>{
+            this.newReminder.due = this.datetimepicker.data("DateTimePicker").date();
+        });
+    }
 
     private Reminder:Reminder = new Reminder();
     reminders: Reminder[];
     newReminder: Reminder = new Reminder();
     myOwnChannels = [];
+    datetimepicker ;
 
     constructor(private reminderService: ReminderService,
                 private channelService: ChannelService) {

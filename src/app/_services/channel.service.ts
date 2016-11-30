@@ -22,6 +22,7 @@ export class ChannelService {
     private getChannelNameWithType(type: number) {
         var params = this.commonService.userToken2params();
         params.append('type', type.toString());
+
         return this.http.get(this.api_base + 'channel', {search: params})
             .map((response: Response)=> {
                     var res = response.json();
@@ -34,6 +35,8 @@ export class ChannelService {
                 }
             );
     }
+
+
 
     getSubscribeChannels() {
         return this.getChannelNameWithType(2);

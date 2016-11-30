@@ -11,15 +11,13 @@ import {AuthenticationService} from "../_services/authentication.service";
 import {CommonService} from "../_services/common.service";
 import {ModalDialogModule} from "../modalDialog/modalDialog.module";
 import {ReminderService} from "../_services/reminder.service";
-import { NKDatetimeModule } from '../../../node_modules/ng2-datetime/ng2-datetime';
 
 @NgModule({
     imports:[
         CommonModule,
         FormsModule,
         MainRouting,
-        ModalDialogModule,
-        NKDatetimeModule
+        ModalDialogModule
     ],
     declarations:[
         MainComponent,
