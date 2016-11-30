@@ -53,6 +53,10 @@
     height: 90px;
 }
 
+.more-subscription-dialog-footer > hr{
+    margin-bottom: 15px;
+}
+
 @media only screen and (max-height: 750px) {
     .more-subscription-dialog-container{
         top: 70px;
