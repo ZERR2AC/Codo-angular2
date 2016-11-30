@@ -1,4 +1,46 @@
-<ul style="text-align: left">
+
+
+<div id="create-reminder" style="border: solid 1px black">
+    <h3>create a reminder</h3>
+    <div class="input-group">
+        <input type="text" class="form-control" placeholder="title:" id="new-reminder-title"
+               [(ngModel)]="newReminder.title">
+        <span class="input-group-btn">
+            <button type="submit" class="btn"><span class="fui-plus"></span></button>
+        </span>
+    </div>
+
+    <div class="form-group">
+        <input type="text" class="form-control" placeholder="content:"
+               id="new-reminder-content" [(ngModel)]="newReminder.content">
+    </div>
+
+    <div>
+        <select class="selectpicker" data-style="btn-info" data-live-search="true">
+            <option value="null">Own</option>
+            <option *ngFor="let channel of myOwnChannels"
+                    [attr.value]="channel.id" >{{channel.name}}</option>
+        </select>
+    </div>
+    <div>
+        <datetime [(ngModel)]="newReminder.due" [datepicker]="datepickerOpts"></datetime>
+    </div>
+
+    <button class="btn btn-primary" (click)="submit()">Submit</button>
+</div>
+
+
+<div style="text-align: left">
+    preview:
+    <p>title: {{newReminder.title}}</p>
+    <p>content: {{newReminder.content}}</p>
+    <p>due: {{newReminder.due}}</p>
+    <p>priority: {{newReminder.priority}}</p>
+    <p>type: {{newReminder.type}}</p>
+    <p>channel_id: {{newReminder.channel_id}}</p>
+</div>
+
+<ul style="text-align: left; border: solid 1px black">
     <li *ngFor="let reminder of reminders">
         id: {{reminder.id}}
         <ul>
@@ -12,15 +54,6 @@
         </ul>
     </li>
 </ul>
-
-<div >
-    <datetime [(ngModel)]="date" [datepicker]="datepickerOpts"></datetime>
-    My date: {{date}}
-</div>
-
-
-
-<button (click)="click()">click</button>
 
 
 
