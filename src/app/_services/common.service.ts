@@ -29,15 +29,19 @@ export class CommonService {
     }
 
     getBody(dict: Object){
-        let urlSearchParams = new URLSearchParams();
-            for (var key in dict) {
-                if (dict.hasOwnProperty(key)) {
-                    urlSearchParams.append(key, dict[key]);
-                }
-            }
+        let urlSearchParams = this.getBodyParams(dict);
         let body = urlSearchParams.toString();
         return body;
     }
 
+    getBodyParams(dict: Object){
+        let urlSearchParams = new URLSearchParams();
+        for (var key in dict) {
+            if (dict.hasOwnProperty(key)) {
+                urlSearchParams.append(key, dict[key]);
+            }
+        }
+        return urlSearchParams;
+    }
 
 }
