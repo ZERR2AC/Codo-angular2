@@ -55,7 +55,7 @@
 
 <ul style="text-align: left; border: solid 1px black">
     <li *ngFor="let reminder of reminders">
-        <reminder-item [reminder]="reminder" (removeReminder)="deleteReminder($event)"></reminder-item>
+        <reminder-item [reminder]="reminder" (removeReminder)="deleteReminder($event)" (reminderUpdated)="updateReminder($event)"></reminder-item>
     </li>
 </ul>
 

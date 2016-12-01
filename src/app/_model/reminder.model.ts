@@ -8,10 +8,13 @@ export class Reminder {
     PRIORITY_LOW = 0;
     PRIORITY_MID = 1;
     PRIORITY_HIGH = 2;
+    UNDO = 0;
+    COMPLETED = 1;
 
     channel_id: number = null;
     title: string = "";
     content: string = "";
+    remark: string="";
     due:Moment;
     id: number = null;
     priority: number = 0;

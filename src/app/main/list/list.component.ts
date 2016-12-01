@@ -111,6 +111,18 @@ export class ListComponent implements OnInit,AfterViewInit{
         )
     }
 
+    updateReminder(reminder:Reminder){
+        this.reminderService.updateReminder(reminder).subscribe(
+            res=>{
+                //successfully update
+                console.log("successful");
+            },
+            err=>{
+                console.log(err);
+            }
+        )
+    }
+
     test(){
         console.log('hahaha');
     }

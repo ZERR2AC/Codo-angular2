@@ -18,6 +18,7 @@ export class ReminderService {
                 private commonService: CommonService) {
         this.api_base = GlobalVariable.BASE_API_URL;
     }
+
     getAllReminder() {
         let params = this.commonService.userToken2params();
         let self = this;
@@ -29,16 +30,16 @@ export class ReminderService {
             });
     }
 
-    transformReminder(reminders:Reminder[]){
+    transformReminder(reminders: Reminder[]) {
         reminders.forEach(function (reminder) {
-            if(reminder.due!=undefined){
+            if (reminder.due != undefined) {
                 //transform due date to Moment obejct;
                 reminder.due = moment(reminder.due);
             }
         })
     }
 
-    addReminder(reminder:Reminder){
+    addReminder(reminder: Reminder) {
         let params = this.commonService.userToken2params();
         let header = this.commonService.constructFormHeader();
         var bodyParams = this.commonService.getBodyParams({
@@ -50,43 +51,87 @@ export class ReminderService {
         });
 
         if (reminder.due != null) {
-            bodyParams.append('due',moment(reminder.due).format('YYYY-MM-DD HH:mm:ss'));
+            bodyParams.append('due', moment(reminder.due).format('YYYY-MM-DD HH:mm:ss'));
         }
 
         let body = bodyParams.toString();
         let self = this;
-        return this.http.post(this.api_base + 'reminder',body,
+        return this.http.post(this.api_base + 'reminder', body,
             {
                 search: params,
                 headers: header
-            }).map((response: Response)=>{
+            }).map((response: Response)=> {
             var res = response.json();
-            if(res.ret == 0){
+            if (res.ret == 0) {
                 if (res.reminder.due == "") {
                     res.reminder.due = undefined;
                 }
                 self.transformReminder([res.reminder]);
                 return res;
-            }else{
+            } else {
                 throw new Error(res.ret);
             }
         })
 
     }
 
-    deleteReminder(reminder:Reminder){
+    deleteReminder(reminder: Reminder) {
         let params = this.commonService.userToken2params();
-        return this.http.delete(this.api_base +  'reminder/' + reminder.id,
+        return this.http.delete(this.api_base + 'reminder/' + reminder.id,
             {
                 search: params
-            }).map((response: Response)=>{
+            }).map((response: Response)=> {
             var res = response.json();
             if (res.ret == 0) {
                 return res;
-            }else{
+            } else {
                 throw Error(res.ret);
             }
         })
+    }
+
+    updateReminder(reminder: Reminder) {
+        let params = this.commonService.userToken2params();
+        let header = this.commonService.constructFormHeader();
+        let currentUserId = JSON.parse(localStorage.getItem("currentUser")).user.id;
+        var bodyParams = this.commonService.getBodyParams({});
+
+        if (currentUserId == reminder.creater_id) {
+            //my own
+            bodyParams = this.commonService.getBodyParams({
+                'title': reminder.title,
+                'content': reminder.content,
+                'due': moment(reminder.due).format('YYYY-MM-DD HH:mm:ss'),
+                'priority': reminder.priority,
+                'state': reminder.state
+            });
+        } else {
+            //receive
+            bodyParams = this.commonService.getBodyParams({
+                'state': reminder.state
+            });
+            if (reminder.remark != undefined) {
+                bodyParams.append('remark', reminder.remark);
+            }
+        }
+
+        let body = bodyParams.toString();
+        let self = this;
+        return this.http.post(this.api_base + 'reminder/' + reminder.id, body,
+            {
+                search: params,
+                headers: header
+            }).map((response: Response)=> {
+            var res = response.json();
+            if (res.ret == 0) {
+                // update successful
+                return res;
+            } else {
+                throw new Error(res.ret);
+            }
+        });
+
+
     }
 
 }
