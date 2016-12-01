@@ -20,11 +20,22 @@ export class ReminderService {
     }
     getAllReminder() {
         let params = this.commonService.userToken2params();
+        let self = this;
         return this.http.get(this.api_base + 'reminder', {search: params})
             .map((response: Response)=> {
                 var res = response.json();
+                self.transformReminder(res.reminders);
                 return res;
             });
+    }
+
+    transformReminder(reminders:Reminder[]){
+        reminders.forEach(function (reminder) {
+            if(reminder.due!=undefined){
+                //transform due date to Moment obejct;
+                reminder.due = moment(reminder.due);
+            }
+        })
     }
 
     addReminder(reminder:Reminder){
@@ -43,6 +54,7 @@ export class ReminderService {
         }
 
         let body = bodyParams.toString();
+        let self = this;
         return this.http.post(this.api_base + 'reminder',body,
             {
                 search: params,
@@ -50,6 +62,10 @@ export class ReminderService {
             }).map((response: Response)=>{
             var res = response.json();
             if(res.ret == 0){
+                if (res.reminder.due == "") {
+                    res.reminder.due = undefined;
+                }
+                self.transformReminder([res.reminder]);
                 return res;
             }else{
                 throw new Error(res.ret);

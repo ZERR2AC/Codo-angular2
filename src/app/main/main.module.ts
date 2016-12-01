@@ -11,6 +11,7 @@ import {AuthenticationService} from "../_services/authentication.service";
 import {CommonService} from "../_services/common.service";
 import {ModalDialogModule} from "../modalDialog/modalDialog.module";
 import {ReminderService} from "../_services/reminder.service";
+import {ReminderItemComponent} from "./list/reminder-item/reminder-item.component";
 
 @NgModule({
     imports:[
@@ -23,7 +24,8 @@ import {ReminderService} from "../_services/reminder.service";
         MainComponent,
         ListComponent,
         SettingComponent,
-        AppDialogComponent
+        AppDialogComponent,
+        ReminderItemComponent
     ],
     providers:[
         AuthenticationService,

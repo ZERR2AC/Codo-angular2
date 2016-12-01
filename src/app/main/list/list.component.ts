@@ -2,6 +2,7 @@ import {Component, OnInit, AfterViewChecked, AfterViewInit} from "@angular/core"
 import {ReminderService} from "../../_services/reminder.service";
 import {Reminder} from "../../_model/reminder.model";
 import {ChannelService} from "../../_services/channel.service";
+import * as moment from 'moment';
 
 declare var $: any;
 
@@ -38,6 +39,7 @@ export class ListComponent implements OnInit,AfterViewInit{
         this.reminderService.getAllReminder().subscribe(
             res => {
                 this.reminders = res.reminders;
+
                 $('.selectpicker').selectpicker('render');
                 $('.selectpicker').on('show.bs.select', function () {
                     $(this).selectpicker('refresh');
@@ -56,17 +58,6 @@ export class ListComponent implements OnInit,AfterViewInit{
 
     }
 
-
-    datepickerOpts = {
-        autoclose: true,
-        todayBtn: 'linked',
-        todayHighlight: true,
-        assumeNearbyYear: true,
-        format: 'D, d MM yyyy'
-    };
-
-
-
     priorityBtnDidClick(reminder:Reminder){
         reminder.priority+=1;
         reminder.priority%=3;
@@ -78,15 +69,18 @@ export class ListComponent implements OnInit,AfterViewInit{
 
         var tempReminder = this.newReminder;
         this.newReminder = new Reminder();
+        var oldDateTimePickerValue = this.datetimepicker.data("DateTimePicker").date();
+        this.datetimepicker.data("DateTimePicker").clear();
 
         // add the reminder first for better user experience
         this.reminders.splice(0,0,tempReminder);
 
         this.reminderService.addReminder(tempReminder).subscribe(
             res=>{
+                var newReminder:Reminder = res.reminder;
                 var i = this.reminders.indexOf(tempReminder);
                 if (i != -1) {
-                    this.reminders.splice(i,1,res.reminder);
+                    this.reminders.splice(i,1,newReminder);
                     console.log(this.reminders[i]);
                 }
             },
@@ -96,6 +90,7 @@ export class ListComponent implements OnInit,AfterViewInit{
                 if (i != -1) {
                     this.reminders.splice(i,1);
                     this.newReminder = tempReminder;
+                    this.datetimepicker.data("DateTimePicker").date(oldDateTimePickerValue);
                 }
             }
         )

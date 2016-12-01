@@ -55,25 +55,7 @@
 
 <ul style="text-align: left; border: solid 1px black">
     <li *ngFor="let reminder of reminders">
-        id: {{reminder.id}}
-        <button class="btn btn-danger" (click)="deleteReminder(reminder)">Delete</button>
-        <ul>
-            <li>title: {{reminder.title}}</li>
-            <li>content: {{reminder.content}}</li>
-            <li>due: {{reminder.due}}</li>
-            <li>priority: {{reminder.priority}}
-                <button class="priority-btn-default btn"
-                        [ngClass]="{
-                    'btn-primary': reminder.priority==Reminder.PRIORITY_LOW,
-                    'btn-success': reminder.priority==Reminder.PRIORITY_MID,
-                    'btn-danger': reminder.priority==Reminder.PRIORITY_HIGH}"
-                        (click)="priorityBtnDidClick(reminder)">
-                </button>
-            </li>
-            <li>type: {{reminder.type}}</li>
-            <li>creater_id: {{reminder.creater_id}}</li>
-            <li>state: {{reminder.state}}</li>
-        </ul>
+        <reminder-item [reminder]="reminder" (removeReminder)="deleteReminder($event)"></reminder-item>
     </li>
 </ul>
 
