@@ -23,6 +23,8 @@ export class ReminderItemComponent implements AfterViewInit {
         this.datetimePicker.on('dp.change', ()=> {
             this.reminder.due = this.datetimePicker.data("DateTimePicker").date();
         });
+
+
     }
 
     @Input()
@@ -58,4 +60,17 @@ export class ReminderItemComponent implements AfterViewInit {
         this.reminderUpdated.emit(this.reminder);
     }
 
+    showCollapse(){
+        //hide all other collapse
+        var collapseContainer = $('.collapse-contrainer');
+        collapseContainer.slideUp(300);
+
+        var collapseContainer = $(this.elementRef.nativeElement).find('.collapse-contrainer');
+        if (collapseContainer.css('display') == 'none') {
+            collapseContainer.slideDown(300);
+        }else{
+            collapseContainer.slideUp(300);
+        }
+
+    }
 }
