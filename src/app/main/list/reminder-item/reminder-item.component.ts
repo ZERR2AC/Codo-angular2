@@ -11,6 +11,28 @@ import {Reminder} from "../../../_model/reminder.model";
 
 
 export class ReminderItemComponent implements AfterViewInit,AfterViewChecked {
+
+    @Input()
+    reminder: Reminder;
+
+    @Output()
+    removeReminder: EventEmitter<Reminder> = new EventEmitter<Reminder>();
+
+    @Output()
+    reminderUpdated: EventEmitter<Reminder> = new EventEmitter<Reminder>();
+
+
+    elementRef: ElementRef;
+    datetimePicker;
+    allTextArea;
+
+    private Reminder: Reminder = new Reminder();
+
+
+    constructor(@Inject(ElementRef) elementRef: ElementRef) {
+        this.elementRef = elementRef;
+    }
+
     // for auto increase textarea
     ngAfterViewChecked(): void {
         this.allTextArea.each(function () {
@@ -30,6 +52,7 @@ export class ReminderItemComponent implements AfterViewInit,AfterViewChecked {
         }
         this.datetimePicker.on('dp.change', ()=> {
             this.reminder.due = dtdate.date();
+            this.updateReminder();
         });
         dtdate.defaultDate(false);
         dtdate.useCurrent('day');
@@ -48,25 +71,6 @@ export class ReminderItemComponent implements AfterViewInit,AfterViewChecked {
 
     }
 
-    @Input()
-    reminder: Reminder;
-
-    @Output()
-    removeReminder: EventEmitter<Reminder> = new EventEmitter<Reminder>();
-
-    @Output()
-    reminderUpdated: EventEmitter<Reminder> = new EventEmitter<Reminder>();
-
-
-    elementRef: ElementRef;
-    datetimePicker;
-    allTextArea;
-
-    constructor(@Inject(ElementRef) elementRef: ElementRef) {
-        this.elementRef = elementRef;
-    }
-
-    private Reminder: Reminder = new Reminder();
 
     priorityBtnDidClick(reminder: Reminder) {
         reminder.priority += 1;

@@ -1,14 +1,5 @@
 <div class="reminder-item">
 
-    <div class="reminder-item-info">
-        <button class="btn btn-danger" (click)="deleteReminder(reminder)">Delete</button>
-    </div>
-
-    <!--date picker-->
-    <div class='datetimepicker'>
-        <input class="datetimepicker-input" placeholder="set due"/>
-    </div>
-
     <!--detail-->
     <div>
         <input class="my-textinput reminder-title" [(ngModel)]="reminder.title" (change)="updateReminder()"/>
@@ -19,21 +10,32 @@
     </div>
 
     <button class="reminder-priority btn"
-            [ngClass]="{
-                    'btn-primary': reminder.priority==Reminder.PRIORITY_LOW,
-                    'btn-success': reminder.priority==Reminder.PRIORITY_MID,
-                    'btn-danger': reminder.priority==Reminder.PRIORITY_HIGH}"
             (click)="priorityBtnDidClick(reminder)">
+        <span [ngClass]="{'reminder-priority-normal': reminder.priority==Reminder.PRIORITY_LOW,
+        'reminder-priority-middle': reminder.priority==Reminder.PRIORITY_MID,
+        'reminder-priority-high': reminder.priority==Reminder.PRIORITY_HIGH }"></span>
     </button>
 
-    <div class="fortesting">
-        <ul>
-            id: {{reminder.id}}
-            <li>type: {{reminder.type}}</li>
-            <li>creater_id: {{reminder.creater_id}}</li>
-            <li>state: {{reminder.state}}</li>
-            <li>due: {{reminder.due}}</li>
-        </ul>
+
+
+
+    <!--date picker-->
+    <div class='datetimepicker'>
+        <div class="datetimepicker-relative">
+            <input class="datetimepicker-input" placeholder="set due"/>
+        </div>
     </div>
+    <i class="reminder-delete-btn fa fa-remove" (click)="deleteReminder(reminder)"></i>
+
 
 </div>
+
+<!--<div class="fortesting">-->
+    <!--<ul>-->
+        <!--id: {{reminder.id}}-->
+        <!--<li>type: {{reminder.type}}</li>-->
+        <!--<li>creater_id: {{reminder.creater_id}}</li>-->
+        <!--<li>state: {{reminder.state}}</li>-->
+        <!--<li>due: {{reminder.due}}</li>-->
+    <!--</ul>-->
+<!--</div>-->
