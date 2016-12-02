@@ -7,7 +7,7 @@
     border-color: #03abf9;
 }
 
-.btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary{
+.btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
     background: #03abf9;
 }
 
@@ -15,17 +15,16 @@
     border-color: #03abf9;
 }
 
-.form-group{
+.form-group {
     margin-bottom: 10px;
 }
 
-.form-control:focus + .input-group-btn button{
+.form-control:focus + .input-group-btn button {
     border-color: #03abf9;
     color: #03abf9;
 }
 
-
-.btn-circle{
+.btn-circle {
     width: 50px;
     height: 50px;
     border-radius: 25px;
@@ -34,41 +33,97 @@
     /*background-color: #03A9F4;*/
 }
 
-.navbar{
+.navbar {
     z-index: 888;
-    box-shadow: 0 0 5px rgba(57,70,78,.2);
+    box-shadow: 0 0 5px rgba(57, 70, 78, .2);
 }
 
-#loading{
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: auto;
-  width: 300px;
-  height: 300px;
-  text-align: center;
-  position: fixed;
-  color: #03A9F4;
+#loading {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 300px;
+    height: 300px;
+    text-align: center;
+    position: fixed;
+    color: #03A9F4;
 }
 
-
-#loading h1{
-  font-size: 10rem;
+#loading h1 {
+    font-size: 10rem;
 }
 
-#loading h3{
-  font-size: 2.4rem;
-  padding-left: 12px;
-  margin-top: 10px;
+#loading h3 {
+    font-size: 2.4rem;
+    padding-left: 12px;
+    margin-top: 10px;
 }
-
 
 .dropdown-menu {
     margin-top: 3px;
 }
 
-
 .bootstrap-datetimepicker-widget.dropdown-menu.bottom {
     top: 26px !important;
+}
+
+/*drop down channel selector*/
+#create-reminder-channel-select .dropdown-toggle {
+    color: rgb(169, 169, 169);
+    background-color: transparent;
+    padding: 1px 5px 0px 5px;
+    float: right;
+}
+
+#create-reminder-channel-select .dropdown-toggle:focus {
+    outline-style: none !important;
+    background-color: aliceblue;
+    border-radius: 10px;
+}
+
+#create-reminder-channel-select .dropdown-menu {
+    box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.08);
+    background-color: white;
+}
+
+#create-reminder-channel-select .dropdown-menu .inner {
+    background-color: white;
+}
+
+#create-reminder-channel-select .bs-searchbox > input {
+    height: 30px;
+}
+
+#create-reminder-channel-select .dropdown-toggle .filter-option {
+    font-size: 1.6rem;
+    text-align: right;
+    padding-right: 24px;
+}
+
+#create-reminder-channel-select .bootstrap-select {
+    width: auto;
+    margin-bottom: 6px;
+}
+
+#create-reminder-channel-select {
+    float: right;
+}
+
+.bootstrap-datetimepicker-widget {
+    box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.08) !important;
+    background-color: white;
+}
+
+.bootstrap-datetimepicker-widget table td.active, .bootstrap-datetimepicker-widget table td.active:hover {
+    background-color: #03A9F4;
+}
+
+a {
+    color: #03A9F4;
+}
+
+.reminder-finished{
+    color: lightgray !important;
 }

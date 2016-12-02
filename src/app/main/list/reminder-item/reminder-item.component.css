@@ -1,3 +1,51 @@
-.collapse-contrainer{
+.reminder-state-ring{
+    display: flex;
+    -moz-border-radius: 100%;
+    -webkit-border-radius: 100%;
+    border-radius: 100%;
+    border: solid #03A9F4 5px;
+    background: transparent;
+    width: 35px;
+    height: 35px;
+}
 
+.reminder-state{
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    top: 12px;
+    right: 12px;
+    z-index: 301;
+}
+
+.reminder-state-point{
+    -moz-border-radius: 100%;
+    -webkit-border-radius: 100%;
+    border-radius: 100%;
+    background: #03A9F4;
+    width: 12px;
+    height: 12px;
+    margin: auto;
+}
+
+.finished-wrapper{
+    z-index: 300 !important;
+    opacity: 0.3 !important;
+}
+
+.finished-wrapper-before{
+    -webkit-transition: all 0.7s ease;
+    -moz-transition: all 0.7s ease;
+    -ms-transition: all 0.7s ease;
+    -o-transition: all 0.7s ease;
+    transition: all 0.7s ease;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: 10px;
+    background-color: lightgray;
+    z-index: -5;
+    opacity: 0;
 }

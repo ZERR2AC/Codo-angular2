@@ -10,10 +10,15 @@ if ('addEventListener' in document) {
     }, false);
 }
 
-// $('html').click(function () {
-//     var collapseContainer = $('.collapse-contrainer');
-//     console.log(collapseContainer);
-//     if (collapseContainer.css('display') != 'none') {
-//         collapseContainer.slideUp(300);
-//     }
-// });
+$('html').click(function (e) {
+    var channelSelect = $('#create-reminder-channel-select');
+    var needCollapse = e.originalEvent.path.indexOf(channelSelect[0])==-1;
+    if (needCollapse) {
+        var collapseContainer = $('.create-reminder-collapse');
+        if (collapseContainer.css('display') != 'none') {
+            collapseContainer.slideUp(300);
+            collapseContainer.addClass('collapse-hide');
+        }
+    }
+
+});

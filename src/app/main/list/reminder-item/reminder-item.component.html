@@ -1,12 +1,17 @@
-<div class="reminder-item">
-
+<div class="reminder-item" [ngClass]="{'reminder-finished': reminder.state == Reminder.COMPLETED}">
+    <div class="finished-wrapper-before" [ngClass]="{'finished-wrapper': reminder.state == Reminder.COMPLETED}">
+    </div>
     <!--detail-->
     <div>
         <input class="my-textinput reminder-title" [(ngModel)]="reminder.title" (change)="updateReminder()"/>
         <textarea class="my-textarea reminder-content" [(ngModel)]="reminder.content"
                   (change)="updateReminder()"></textarea>
-        <textarea *ngIf="reminder.type == 0" class="my-textarea reminder-content" [(ngModel)]="reminder.remark"
-                  (change)="updateReminder()" placeholder="add a remark..."></textarea>
+
+        <div *ngIf="reminder.type==0">
+            <hr>
+            <textarea class="my-textarea reminder-content" [(ngModel)]="reminder.remark"
+                      (change)="updateReminder()" placeholder="add a remark..."></textarea>
+        </div>
     </div>
 
     <button class="reminder-priority btn"
@@ -17,8 +22,6 @@
     </button>
 
 
-
-
     <!--date picker-->
     <div class='datetimepicker'>
         <div class="datetimepicker-relative">
@@ -27,15 +30,20 @@
     </div>
     <i class="reminder-delete-btn fa fa-remove" (click)="deleteReminder(reminder)"></i>
 
+    <div class="reminder-state" (click)="changeReminderState()">
+        <div class="reminder-state-ring">
+            <div *ngIf="reminder.state" class="reminder-state-point"></div>
+        </div>
+    </div>
 
 </div>
 
 <!--<div class="fortesting">-->
-    <!--<ul>-->
-        <!--id: {{reminder.id}}-->
-        <!--<li>type: {{reminder.type}}</li>-->
-        <!--<li>creater_id: {{reminder.creater_id}}</li>-->
-        <!--<li>state: {{reminder.state}}</li>-->
-        <!--<li>due: {{reminder.due}}</li>-->
-    <!--</ul>-->
+<!--<ul>-->
+<!--id: {{reminder.id}}-->
+<!--<li>type: {{reminder.type}}</li>-->
+<!--<li>creater_id: {{reminder.creater_id}}</li>-->
+<!--<li>state: {{reminder.state}}</li>-->
+<!--<li>due: {{reminder.due}}</li>-->
+<!--</ul>-->
 <!--</div>-->

@@ -1,7 +1,7 @@
-.list-page-contrainer{
+.list-page-contrainer {
     width: 90%;
     max-width: 800px;
-    margin:auto;
+    margin: auto;
 }
 
 .my-textarea {
@@ -9,57 +9,60 @@
     border: none !important;
     resize: none;
     width: 100%;
+    background-color: transparent;
 }
 
-.my-textarea:focus{
+.my-textarea:focus {
     outline-style: none;
     background-color: aliceblue;
     border-radius: 10px;
 }
 
-.my-textinput{
+.my-textinput {
     border: none !important;
     padding-left: 20px;
     width: 100%;
+    background-color: transparent;
 }
 
-.my-textinput:focus{
+.my-textinput:focus {
     outline-style: none;
     background-color: aliceblue;
     border-radius: 10px;
 }
 
-.reminder-title{
+.reminder-title {
     font-size: 2.7rem;
     font-weight: bold;
 }
 
-.reminder-content{
+.reminder-content {
     font-size: 1.6rem;
 }
 
-.reminder-item{
+.reminder-item {
     position: relative;
-    margin-top: 10px;
-    margin-bottom:10px;
+    margin-top: 13px;
+    margin-bottom: 13px;
     border-radius: 10px;
     padding: 5px 5px 20px 5px;
-    box-shadow:  0 3px 8px 0 rgba(0,0,0,0.2),0 0 0 1px rgba(0,0,0,0.08);
+    box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.08);
 }
 
-.reminder-item:hover .reminder-delete-btn{
+.reminder-item:hover .reminder-delete-btn {
     opacity: 1;
 }
 
-.reminder-priority{
+.reminder-priority {
     border: none;
     padding: 2px 5px;
     position: absolute;
     top: 12px;
+    left: 5px;
     background-color: transparent;
 }
 
-.reminder-priority>span{
+.reminder-priority > span {
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -ms-transition: all 0.5s ease;
@@ -71,47 +74,48 @@
     border-radius: 4px;
 }
 
-.reminder-priority-normal{
+.reminder-priority-normal {
     background-color: #03A9F4;
 }
 
-.reminder-priority-middle{
+.reminder-priority-middle {
     background-color: #8BC34A;
 }
 
-.reminder-priority-high{
+.reminder-priority-high {
     background-color: #E91E63;
 }
 
-.fortesting{
+.reminder-finished .reminder-priority >span{
     background-color: lightgray;
 }
 
-.datetimepicker{
+.fortesting {
+    background-color: lightgray;
+}
+
+.datetimepicker {
     position: absolute;
     bottom: 2px;
     right: 2px;
 }
 
-.datetimepicker-input{
+.datetimepicker-input {
     font-size: 1.2rem;
     text-align: right;
     padding-right: 10px;
     color: gray;
     border: none;
+    background-color: transparent;
 }
 
-.datetimepicker-input:focus{
+.datetimepicker-input:focus {
     outline-style: none;
     background-color: aliceblue;
     border-radius: 10px;
 }
 
-.datetimepicker-relative{
-    position: relative;
-}
-
-.reminder-delete-btn{
+.reminder-delete-btn {
     z-index: 300;
     position: absolute;
     font-size: 15px;
@@ -128,7 +132,42 @@
     transition: all 0.4s ease;
 }
 
-.reminder-delete-btn:hover{
+.reminder-delete-btn:hover {
     color: #E91E63;
+}
+
+
+/*create new reminder collapse*/
+.collapse-hide{
+    display: none;
+}
+
+#create-reminder{
+    padding-bottom: 5px;
+    margin-bottom: 20px;
+}
+
+.datetimepicker-relative{
+    position: relative;
+}
+
+#create-reminder .datetimepicker-relative{
+    text-align: left;
+    padding-left: 15px;
+}
+
+#create-reminder .datetimepicker-input{
+    font-size: 1.6rem;
+    float: left;
+    padding-right: 5px;
+    padding-left: 5px;
+    text-align: left;
+}
+
+#create-reminder .btn-circle{
+    margin-top: 20px;
+    color: white;
+    font-size: 2rem;
+    background-color: #03A9F4;
 }
 

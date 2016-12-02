@@ -8,20 +8,10 @@ declare var $: any;
 
 @Component({
     templateUrl: 'list.component.html',
-    styleUrls:['list.component.css']
+    styleUrls:['list.component.css','../main.component.css']
 })
 
-export class ListComponent implements OnInit,AfterViewInit{
-
-    ngAfterViewInit(): void {
-
-        //init new reminder due date picker
-        this.datetimepicker = $('#datetimepicker');
-        $('#datetimepicker').datetimepicker();
-        this.datetimepicker.on('dp.change',()=>{
-            this.newReminder.due = this.datetimepicker.data("DateTimePicker").date();
-        });
-    }
+export class ListComponent implements OnInit,AfterViewInit,AfterViewChecked{
 
     private Reminder:Reminder = new Reminder();
     reminders: Reminder[];
@@ -39,11 +29,6 @@ export class ListComponent implements OnInit,AfterViewInit{
         this.reminderService.getAllReminder().subscribe(
             res => {
                 this.reminders = res.reminders;
-
-                $('.selectpicker').selectpicker('render');
-                $('.selectpicker').on('show.bs.select', function () {
-                    $(this).selectpicker('refresh');
-                });
             },
             err => console.log(err)
         );
@@ -57,6 +42,52 @@ export class ListComponent implements OnInit,AfterViewInit{
         )
 
     }
+
+    ngAfterViewChecked(): void {
+        // for auto increase textarea
+        var allTextArea = $('.my-textarea');
+        allTextArea.each(function () {
+            this.style.height = "0px";
+            this.style.height = (this.scrollHeight) + "px";
+        });
+    }
+
+    ngAfterViewInit(): void {
+
+        //init new reminder due date picker
+        this.datetimepicker = $('#create-reminder-datetimepicker');
+        $('#create-reminder-datetimepicker').datetimepicker();
+        var dtdate =  this.datetimepicker.data("DateTimePicker");
+        this.datetimepicker.on('dp.change',()=>{
+            this.newReminder.due = dtdate.date();
+        });
+
+        dtdate.defaultDate(false);
+        dtdate.useCurrent('day');
+        dtdate.showClear(true);
+
+        //text area height after resize
+        let self = this;
+        $(window).on('resize', function () {
+            self.ngAfterViewChecked();
+        });
+
+        //new reminder collapse expand
+        let newReminderDiv = $('#create-reminder');
+        newReminderDiv.click(()=>{
+            let collpaseDiv = newReminderDiv.find('.create-reminder-collapse');
+            if (collpaseDiv.css('display') == 'none') {
+                collpaseDiv.slideDown(300,function(){
+                    $('select').selectpicker('render');
+                    $('select').on('show.bs.select', function () {
+                        $(this).selectpicker('refresh');
+                    });
+                    collpaseDiv.removeClass('collapse-hide');
+                });
+            }
+        });
+    }
+
 
     priorityBtnDidClick(reminder:Reminder){
         reminder.priority+=1;
@@ -121,6 +152,14 @@ export class ListComponent implements OnInit,AfterViewInit{
                 console.log(err);
             }
         )
+    }
+
+    stopPropagationFilter(e){
+        var channelSelect = $('#create-reminder-channel-select');
+        var needStop = e.path.indexOf(channelSelect[0])==-1;
+        if (needStop) {
+            e.stopPropagation();
+        }
     }
 
     test(){

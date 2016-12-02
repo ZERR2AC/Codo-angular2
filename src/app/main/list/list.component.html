@@ -1,53 +1,49 @@
 <div class="list-page-contrainer">
 
-    <div id="create-reminder">
-        <div class="input-group">
-            <input type="text" class="form-control" placeholder="title:" id="new-reminder-title"
-                   [(ngModel)]="newReminder.title">
-            <span
-                class="input-group-btn">
-            <button type="submit" class="btn"><span class="fui-plus"></span></button>
-        </span>
-        </div>
+    <div id="create-reminder" class="reminder-item" (click)="stopPropagationFilter($event)">
+        <input id="create-reminder-title" class="my-textinput reminder-title" [(ngModel)]="newReminder.title"
+               placeholder="Create a new reminder"/>
+        <!--detail-->
 
-        <div class="create-reminder-collapse" style="display: none">
-            <div class="form-group">
-                <input type="text" class="form-control" placeholder="content:"
-                       id="new-reminder-content" [(ngModel)]="newReminder.content">
+        <button class="reminder-priority btn"
+                (click)="priorityBtnDidClick(newReminder)">
+        <span [ngClass]="{'reminder-priority-normal': newReminder.priority==Reminder.PRIORITY_LOW,
+        'reminder-priority-middle': newReminder.priority==Reminder.PRIORITY_MID,
+        'reminder-priority-high': newReminder.priority==Reminder.PRIORITY_HIGH }"></span>
+        </button>
+
+
+        <div class="create-reminder-collapse collapse-hide">
+            <textarea class="my-textarea reminder-content" [(ngModel)]="newReminder.content"
+                      placeholder="add content..."></textarea>
+
+            <!--<hr style="margin: auto;">-->
+
+            <div>
+                <!--date picker-->
+                <div class='datetimepicker-relative'>
+                    <input id="create-reminder-datetimepicker" class="datetimepicker-input" placeholder="remind me on a day"/>
+                </div>
+                <!--channel selector-->
+                <div id="create-reminder-channel-select" class="channel-selector" style="display: inline">
+                    <select class="selectpicker channel-item" data-style="btn-info" data-live-search="true">
+                        <option value="null">Own</option>
+                        <option *ngFor="let channel of myOwnChannels"
+                                [attr.value]="channel.id">{{channel.name}}
+                        </option>
+                    </select>
+                </div>
             </div>
 
-            <div class="channel-selector" style="display: inline">
-                <select class="selectpicker" data-style="btn-info" data-live-search="true">
-                    <option value="null">Own</option>
-                    <option *ngFor="let channel of myOwnChannels"
-                            [attr.value]="channel.id">{{channel.name}}
-                    </option>
-                </select>
-            </div>
-
-            <button class="priority-btn-default btn"
-                    [ngClass]="{
-                    'btn-primary': newReminder.priority==Reminder.PRIORITY_LOW,
-                    'btn-success': newReminder.priority==Reminder.PRIORITY_MID,
-                    'btn-danger': newReminder.priority==Reminder.PRIORITY_HIGH}"
-                    (click)="priorityBtnDidClick(newReminder)">
-                priority
+            <div style="clear: both"></div>
+            <button class="btn btn-circle" (click)="submitNewReminder()">
+                <i class="fa fa-plus"></i>
             </button>
-
-            <!--date picker-->
-
-            <div class='input-group date' id='datetimepicker'>
-                <input type='text' class="form-control"/>
-                <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-            </div>
-
-            <button class="btn btn-primary" (click)="submitNewReminder()">Submit</button>
         </div>
 
 
     </div>
+
 
     <div class="reminder-item-container" style="text-align: left;">
         <reminder-item *ngFor="let reminder of reminders"

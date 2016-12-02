@@ -10,7 +10,7 @@ import {Reminder} from "../../../_model/reminder.model";
 })
 
 
-export class ReminderItemComponent implements AfterViewInit,AfterViewChecked {
+export class ReminderItemComponent implements AfterViewInit {
 
     @Input()
     reminder: Reminder;
@@ -31,14 +31,6 @@ export class ReminderItemComponent implements AfterViewInit,AfterViewChecked {
 
     constructor(@Inject(ElementRef) elementRef: ElementRef) {
         this.elementRef = elementRef;
-    }
-
-    // for auto increase textarea
-    ngAfterViewChecked(): void {
-        this.allTextArea.each(function () {
-            this.style.height = "0px";
-            this.style.height = (this.scrollHeight) + "px";
-        });
     }
 
     ngAfterViewInit(): void {
@@ -64,11 +56,6 @@ export class ReminderItemComponent implements AfterViewInit,AfterViewChecked {
             this.setAttribute('style', 'overflow-y:hidden;');
         });
 
-        let self = this;
-        $(window).on('resize', function () {
-            self.ngAfterViewChecked();
-        });
-
     }
 
 
@@ -86,6 +73,16 @@ export class ReminderItemComponent implements AfterViewInit,AfterViewChecked {
     updateReminder() {
         console.log("update reminder");
         this.reminderUpdated.emit(this.reminder);
+    }
+
+    changeReminderState(){
+        if(this.reminder.state==this.Reminder.UNDO){
+            this.reminder.state = this.Reminder.COMPLETED;
+        }else{
+            this.reminder.state = this.Reminder.UNDO;
+        }
+        console.log(this.reminder.state);
+        this.updateReminder();
     }
 
     test() {
