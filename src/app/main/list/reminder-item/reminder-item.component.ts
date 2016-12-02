@@ -1,29 +1,50 @@
 import {
-    Component, Input, EventEmitter, Output, AfterViewInit, ElementRef, Inject
+    Component, Input, EventEmitter, Output, AfterViewInit, ElementRef, Inject, AfterContentInit, AfterViewChecked
 } from "@angular/core";
 import {Reminder} from "../../../_model/reminder.model";
 
 @Component({
     selector: 'reminder-item',
     templateUrl: 'reminder-item.component.html',
-    styleUrls: ['reminder-item.component.css']
+    styleUrls: ['reminder-item.component.css', '../list.component.css']
 })
 
 
-export class ReminderItemComponent implements AfterViewInit {
+export class ReminderItemComponent implements AfterViewInit,AfterViewChecked {
+    // for auto increase textarea
+    ngAfterViewChecked(): void {
+        this.allTextArea.each(function () {
+            this.style.height = "0px";
+            this.style.height = (this.scrollHeight) + "px";
+        });
+    }
 
     ngAfterViewInit(): void {
         //init datetimepicker
-        var i = $('.datetimepicker');
-        this.datetimePicker = $(this.elementRef.nativeElement).find('.datetimepicker');
+        this.datetimePicker = $(this.elementRef.nativeElement).find('.datetimepicker-input');
         this.datetimePicker.datetimepicker();
+
+        var dtdate = this.datetimePicker.data("DateTimePicker");
         if (this.reminder.due != undefined) {
             this.datetimePicker.data("DateTimePicker").date(this.reminder.due);
         }
         this.datetimePicker.on('dp.change', ()=> {
-            this.reminder.due = this.datetimePicker.data("DateTimePicker").date();
+            this.reminder.due = dtdate.date();
+        });
+        dtdate.defaultDate(false);
+        dtdate.useCurrent('day');
+        dtdate.showClear(true);
+
+        //init textarea
+        this.allTextArea = $(this.elementRef.nativeElement).find('.my-textarea');
+        this.allTextArea.each(function () {
+            this.setAttribute('style', 'overflow-y:hidden;');
         });
 
+        let self = this;
+        $(window).on('resize', function () {
+            self.ngAfterViewChecked();
+        });
 
     }
 
@@ -39,6 +60,7 @@ export class ReminderItemComponent implements AfterViewInit {
 
     elementRef: ElementRef;
     datetimePicker;
+    allTextArea;
 
     constructor(@Inject(ElementRef) elementRef: ElementRef) {
         this.elementRef = elementRef;
@@ -49,6 +71,7 @@ export class ReminderItemComponent implements AfterViewInit {
     priorityBtnDidClick(reminder: Reminder) {
         reminder.priority += 1;
         reminder.priority %= 3;
+        this.updateReminder();
     }
 
 
@@ -56,21 +79,12 @@ export class ReminderItemComponent implements AfterViewInit {
         this.removeReminder.emit(this.reminder);
     }
 
-    updateReminder(){
+    updateReminder() {
+        console.log("update reminder");
         this.reminderUpdated.emit(this.reminder);
     }
 
-    showCollapse(){
-        //hide all other collapse
-        var collapseContainer = $('.collapse-contrainer');
-        collapseContainer.slideUp(300);
-
-        var collapseContainer = $(this.elementRef.nativeElement).find('.collapse-contrainer');
-        if (collapseContainer.css('display') == 'none') {
-            collapseContainer.slideDown(300);
-        }else{
-            collapseContainer.slideUp(300);
-        }
-
+    test() {
+        console.log('here');
     }
 }

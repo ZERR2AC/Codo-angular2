@@ -1,0 +1,37 @@
+.my-textarea{
+    border: none !important;
+    resize: none;
+    width: 100%;
+}
+
+.my-textinput{
+    border: none !important;
+    padding-left: 11px;
+    width: 100%;
+}
+
+.reminder-title{
+    font-size: 2.5rem;
+}
+
+.reminder-content{
+    font-size: 1.5rem;
+}
+
+.reminder-priority{
+
+}
+
+.fortesting{
+    background-color: lightgray;
+}
+
+.datetimepicker-button{
+    background: transparent;
+    border: none;
+}
+
+.datetimepicker{
+    position: relative;
+}
+

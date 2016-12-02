@@ -67,3 +67,8 @@
 .dropdown-menu {
     margin-top: 3px;
 }
+
+
+.bootstrap-datetimepicker-widget.dropdown-menu.bottom {
+    top: 26px !important;
+}

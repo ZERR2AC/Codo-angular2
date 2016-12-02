@@ -53,11 +53,12 @@
     <button class="btn btn-primary" (click)="submitNewReminder()">Submit</button>
 </div>
 
-<ul style="text-align: left; border: solid 1px black">
-    <li *ngFor="let reminder of reminders">
-        <reminder-item [reminder]="reminder" (removeReminder)="deleteReminder($event)" (reminderUpdated)="updateReminder($event)"></reminder-item>
-    </li>
-</ul>
+<div class="reminder-item-container" style="text-align: left; border: solid 1px black">
+    <reminder-item *ngFor="let reminder of reminders"
+                   [reminder]="reminder"
+                   (removeReminder)="deleteReminder($event)"
+                   (reminderUpdated)="updateReminder($event)"></reminder-item>
+</div>
 
 
 

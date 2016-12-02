@@ -1,50 +1,39 @@
-<div class="reminder-item" (click)="$event.stopPropagation();">
+<div class="reminder-item">
 
-    <div class="reminder-item-info" (click)="showCollapse();">
-        id: {{reminder.id}}
-        <button (click)="updateReminder()">update</button>
-
+    <div class="reminder-item-info">
         <button class="btn btn-danger" (click)="deleteReminder(reminder)">Delete</button>
     </div>
 
-
-<div class="collapse-contrainer">
     <!--date picker-->
-    <div>
-        <div class="container">
-            <div class="row">
-                <div class='col-sm-6'>
-                    <div class="form-group">
-                        <div class='input-group date datetimepicker'>
-                            <input type='text' class="form-control"/>
-                            <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+    <div class='datetimepicker'>
+        <input class="datetimepicker-input" placeholder="set due"/>
     </div>
-    <ul>
-        <li>title: {{reminder.title}}</li>
-        <li>content: {{reminder.content}}</li>
-        <li>due: {{reminder.due}}</li>
-        <li>priority: {{reminder.priority}}
-            <button class="priority-btn-default btn"
-                    [ngClass]="{
+
+    <!--detail-->
+    <div>
+        <input class="my-textinput reminder-title" [(ngModel)]="reminder.title" (change)="updateReminder()"/>
+        <textarea class="my-textarea reminder-content" [(ngModel)]="reminder.content"
+                  (change)="updateReminder()"></textarea>
+        <textarea *ngIf="reminder.type == 0" class="my-textarea reminder-content" [(ngModel)]="reminder.remark"
+                  (change)="updateReminder()" placeholder="add a remark..."></textarea>
+    </div>
+
+    <button class="reminder-priority btn"
+            [ngClass]="{
                     'btn-primary': reminder.priority==Reminder.PRIORITY_LOW,
                     'btn-success': reminder.priority==Reminder.PRIORITY_MID,
                     'btn-danger': reminder.priority==Reminder.PRIORITY_HIGH}"
-                    (click)="priorityBtnDidClick(reminder)">
-            </button>
-        </li>
-        <li>type: {{reminder.type}}</li>
-        <li>creater_id: {{reminder.creater_id}}</li>
-        <li>state: {{reminder.state}}</li>
-    </ul>
+            (click)="priorityBtnDidClick(reminder)">
+    </button>
 
-</div>
+    <div class="fortesting">
+        <ul>
+            id: {{reminder.id}}
+            <li>type: {{reminder.type}}</li>
+            <li>creater_id: {{reminder.creater_id}}</li>
+            <li>state: {{reminder.state}}</li>
+            <li>due: {{reminder.due}}</li>
+        </ul>
+    </div>
 
 </div>

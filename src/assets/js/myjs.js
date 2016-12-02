@@ -10,10 +10,10 @@ if ('addEventListener' in document) {
     }, false);
 }
 
-$('html').click(function () {
-    var collapseContainer = $('.collapse-contrainer');
-    console.log(collapseContainer);
-    if (collapseContainer.css('display') != 'none') {
-        collapseContainer.slideUp(300);
-    }
-});
+// $('html').click(function () {
+//     var collapseContainer = $('.collapse-contrainer');
+//     console.log(collapseContainer);
+//     if (collapseContainer.css('display') != 'none') {
+//         collapseContainer.slideUp(300);
+//     }
+// });
