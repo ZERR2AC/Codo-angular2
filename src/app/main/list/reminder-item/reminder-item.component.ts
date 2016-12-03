@@ -49,9 +49,10 @@ export class ReminderItemComponent implements AfterViewInit {
             this.reminder.due = dtdate.date();
             this.updateReminder();
         });
-        dtdate.defaultDate(false);
-        dtdate.useCurrent('day');
+
         dtdate.showClear(true);
+        dtdate.useCurrent(false);
+        dtdate.defaultDate(false);
 
         //init textarea
         this.allTextArea = $(this.elementRef.nativeElement).find('.my-textarea');

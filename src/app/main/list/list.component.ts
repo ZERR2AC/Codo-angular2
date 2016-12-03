@@ -62,8 +62,7 @@ export class ListComponent implements OnInit,AfterViewInit,AfterViewChecked{
             this.newReminder.due = dtdate.date();
         });
 
-        dtdate.defaultDate(false);
-        dtdate.useCurrent('day');
+        dtdate.useCurrent(false);
         dtdate.showClear(true);
 
         //text area height after resize
