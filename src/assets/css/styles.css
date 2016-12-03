@@ -1,3 +1,7 @@
+body{
+    font-family: Lato,Helvetica,Arial,'Microsoft Yahei', sans-serif;
+}
+
 .btn-primary {
     background-color: #2196F3;
 }

@@ -1,10 +1,6 @@
 <div class="list-page-contrainer">
 
     <div id="create-reminder" class="reminder-item" (click)="stopPropagationFilter($event)">
-        <input id="create-reminder-title" class="my-textinput reminder-title" [(ngModel)]="newReminder.title"
-               placeholder="Create a new reminder"/>
-        <!--detail-->
-
         <button class="reminder-priority btn"
                 (click)="priorityBtnDidClick(newReminder)">
         <span [ngClass]="{'reminder-priority-normal': newReminder.priority==Reminder.PRIORITY_LOW,
@@ -12,6 +8,9 @@
         'reminder-priority-high': newReminder.priority==Reminder.PRIORITY_HIGH }"></span>
         </button>
 
+        <input id="create-reminder-title" class="my-textinput reminder-title" [(ngModel)]="newReminder.title"
+               placeholder="Create a new reminder"/>
+        <!--detail-->
 
         <div class="create-reminder-collapse collapse-hide">
             <textarea class="my-textarea reminder-content" [(ngModel)]="newReminder.content"
@@ -22,7 +21,8 @@
             <div>
                 <!--date picker-->
                 <div class='datetimepicker-relative'>
-                    <input id="create-reminder-datetimepicker" class="datetimepicker-input" placeholder="remind me on a day"/>
+                    <input id="create-reminder-datetimepicker" class="datetimepicker-input"
+                           placeholder="remind me on a day"/>
                 </div>
                 <!--channel selector-->
                 <div id="create-reminder-channel-select" class="channel-selector" style="display: inline">

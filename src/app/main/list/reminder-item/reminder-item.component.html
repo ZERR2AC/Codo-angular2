@@ -1,6 +1,15 @@
 <div class="reminder-item" [ngClass]="{'reminder-finished': reminder.state == Reminder.COMPLETED}">
     <div class="finished-wrapper-before" [ngClass]="{'finished-wrapper': reminder.state == Reminder.COMPLETED}">
     </div>
+
+    <button class="reminder-priority btn"
+            (click)="priorityBtnDidClick(reminder)">
+        <span [ngClass]="{'reminder-priority-normal': reminder.priority==Reminder.PRIORITY_LOW,
+        'reminder-priority-middle': reminder.priority==Reminder.PRIORITY_MID,
+        'reminder-priority-high': reminder.priority==Reminder.PRIORITY_HIGH }"></span>
+    </button>
+
+
     <!--detail-->
     <div>
         <input class="my-textinput reminder-title" [(ngModel)]="reminder.title" (change)="updateReminder()"
@@ -22,12 +31,6 @@
         </div>
     </div>
 
-    <button class="reminder-priority btn"
-            (click)="priorityBtnDidClick(reminder)">
-        <span [ngClass]="{'reminder-priority-normal': reminder.priority==Reminder.PRIORITY_LOW,
-        'reminder-priority-middle': reminder.priority==Reminder.PRIORITY_MID,
-        'reminder-priority-high': reminder.priority==Reminder.PRIORITY_HIGH }"></span>
-    </button>
 
 
     <!--date picker-->
