@@ -32,7 +32,7 @@
 
     <div class="reminder-state" (click)="changeReminderState()">
         <div class="reminder-state-ring">
-            <div *ngIf="reminder.state" class="reminder-state-point"></div>
+            <div class="reminder-state-point" [ngClass]="{'reminder-state-finished': reminder.state == Reminder.COMPLETED}"></div>
         </div>
     </div>
 

@@ -18,6 +18,14 @@
     z-index: 301;
 }
 
+.reminder-state:hover .reminder-state-point{
+    opacity: 1;
+}
+
+.reminder-state .reminder-state-finished{
+    opacity: 1;
+}
+
 .reminder-state-point{
     -moz-border-radius: 100%;
     -webkit-border-radius: 100%;
@@ -26,6 +34,16 @@
     width: 12px;
     height: 12px;
     margin: auto;
+    opacity: 0;
+    -webkit-transition: opacity 0.5s ease;
+    -moz-transition: opacity 0.5s ease;
+    -ms-transition: opacity 0.5s ease;
+    -o-transition: opacity 0.5s ease;
+    transition: opacity 0.5s ease;
+}
+
+.reminder-state:active .reminder-state-point{
+    background-color: #2196F3!important;
 }
 
 .finished-wrapper{
