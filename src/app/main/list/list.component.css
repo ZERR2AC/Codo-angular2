@@ -23,6 +23,9 @@
     padding-left: 20px;
     width: 100%;
     background-color: transparent;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding-right: 50px;
 }
 
 .my-textinput:focus {
@@ -90,8 +93,8 @@
     background-color: lightgray;
 }
 
-.fortesting {
-    background-color: lightgray;
+.reminder-finished .channel-item{
+    background-color: lightgray !important;
 }
 
 .datetimepicker {

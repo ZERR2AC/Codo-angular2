@@ -3,9 +3,17 @@
     </div>
     <!--detail-->
     <div>
-        <input class="my-textinput reminder-title" [(ngModel)]="reminder.title" (change)="updateReminder()"/>
+        <input class="my-textinput reminder-title" [(ngModel)]="reminder.title" (change)="updateReminder()"
+               [readonly]="!(reminder.channel==undefined || reminder.channel.type==1)"/>
+
+        <!--channel info-->
+        <div *ngIf="reminder.channel!=undefined" [ngClass]="{'reminder-channel-my-channel': reminder.channel.type == 1}"
+             class="channel-item">{{reminder.channel.name}}
+        </div>
+
         <textarea class="my-textarea reminder-content" [(ngModel)]="reminder.content"
-                  (change)="updateReminder()"></textarea>
+                  (change)="updateReminder()"
+                  [readonly]="!(reminder.channel==undefined || reminder.channel.type==1)"></textarea>
 
         <div *ngIf="reminder.type==0">
             <hr>
@@ -30,11 +38,14 @@
     </div>
     <i class="reminder-delete-btn fa fa-remove" (click)="deleteReminder(reminder)"></i>
 
+    <!--state ring-->
     <div class="reminder-state" (click)="changeReminderState()">
         <div class="reminder-state-ring">
-            <div class="reminder-state-point" [ngClass]="{'reminder-state-finished': reminder.state == Reminder.COMPLETED}"></div>
+            <div class="reminder-state-point"
+                 [ngClass]="{'reminder-state-finished': reminder.state == Reminder.COMPLETED}"></div>
         </div>
     </div>
+
 
 </div>
 

@@ -6,7 +6,7 @@ import {Reminder} from "../../../_model/reminder.model";
 @Component({
     selector: 'reminder-item',
     templateUrl: 'reminder-item.component.html',
-    styleUrls: ['reminder-item.component.css', '../list.component.css']
+    styleUrls: ['reminder-item.component.css', '../list.component.css','../../main.component.css']
 })
 
 
@@ -39,9 +39,12 @@ export class ReminderItemComponent implements AfterViewInit {
         this.datetimePicker.datetimepicker();
 
         var dtdate = this.datetimePicker.data("DateTimePicker");
-        if (this.reminder.due != undefined) {
+        if (this.reminder.due == undefined ||this.reminder.due == null) {
+            //wrong due
+        }else{
             this.datetimePicker.data("DateTimePicker").date(this.reminder.due);
         }
+
         this.datetimePicker.on('dp.change', ()=> {
             this.reminder.due = dtdate.date();
             this.updateReminder();
