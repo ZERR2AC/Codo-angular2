@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import {Component, AfterViewInit} from "@angular/core";
 import {Router} from "@angular/router";
 import {GlobalVariable} from '../global'
 import {AuthenticationService} from "../_services/authentication.service";
@@ -10,7 +10,74 @@ declare var $: any;
     styleUrls: ['login.component.css']
 })
 
-export class LoginComponent {
+export class LoginComponent implements AfterViewInit {
+    ngAfterViewInit(): void {
+
+        // for background video
+        //jQuery is required to run this code
+        $(document).ready(function () {
+            scaleVideoContainer();
+
+            initBannerVideoSize('.video-container .poster img');
+            initBannerVideoSize('.video-container video');
+
+            $(window).on('resize', function () {
+                scaleVideoContainer();
+                scaleBannerVideoSize('.video-container .poster img');
+                scaleBannerVideoSize('.video-container video');
+            });
+
+        });
+
+        function scaleVideoContainer() {
+
+            var height = $(window).height();
+            var unitHeight = parseInt(height) + 'px';
+            $('.video-container').css('height', unitHeight);
+
+        }
+
+        function initBannerVideoSize(element) {
+
+            $(element).each(function () {
+                $(this).data('height', $(this).height());
+                $(this).data('width', $(this).width());
+            });
+
+            scaleBannerVideoSize(element);
+
+        }
+
+        function scaleBannerVideoSize(element) {
+
+            var windowWidth = $(window).width(),
+                windowHeight = $(window).height(),
+                videoWidth,
+                videoHeight;
+
+            $(element).each(function () {
+                // var videoAspectRatio = $(this).data('height')/$(this).data('width');
+                var videoAspectRatio = 0.5;
+                $(this).removeAttr("style").width(windowWidth);
+                var showVideoHeight = windowWidth * videoAspectRatio;
+
+                if (showVideoHeight < windowHeight) {
+                    $(this).removeAttr("style").height(windowHeight);
+                }
+
+                if(windowWidth>2000){
+                    $(this).removeAttr("style").width(windowWidth);
+                }
+
+
+
+                $('.video-container video').addClass('fadeIn animated');
+
+            });
+        }
+
+    }
+
     model: any = {};
     isInSignup: boolean = false;
 
@@ -28,12 +95,15 @@ export class LoginComponent {
     }
 
     login(): void {
-        console.log(typeof module.id);
         this.authenticationService.login(this.model.username, this.model.password)
             .subscribe((res) => {
                     if (res.ret == 0) {
                         //successful
-                        this.router.navigate(['/']);
+                        $('.login-component-container').addClass('fadeOut animated');
+                        setTimeout(()=>{
+                            this.router.navigate(['/']);
+                        },300)
+
                     } else if (res.ret == 2) {
                         // password mismatch
                     }

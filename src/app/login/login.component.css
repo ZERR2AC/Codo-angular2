@@ -3,13 +3,15 @@
     height: 310px;
     margin: auto;
     position: absolute;
+    z-index: 101;
     top: 0; left: 0; bottom: 0; right: 0;
 }
 
 .animate-container{
-    border: solid 0.5rem #2196F3;
+    box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(0, 0, 0, 0.14);
     border-radius: 1rem;
     padding: 10px 25px 10px 25px;
+    background-color: rgba(255,255,255,0.95);
 }
 
 .login-button-group{
@@ -37,6 +39,42 @@
     max-width: 1000px !important;
 }
 
-@media (min-width: 768px) {
+.login-component-container .login-codo{
+    position: absolute;
+    color: white;
+    z-index: 102;
+    font-weight: bolder;
+    font-size: 2.5rem;
+    top: 1rem;
+    left: 2.5rem;
+}
 
+/*background video*/
+@media screen and (max-device-width: 600px) {
+    .video-container video {
+        display: none;
+    }
+
+    .poster{
+        display: block !important;
+    }
+
+}
+
+.video-container {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    top:0 ;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    background: #000;
+}
+
+.video-container video {
+    position: absolute;
+    z-index: 0;
+    top: 0;
 }
