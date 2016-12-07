@@ -62,8 +62,6 @@
 }
 
 .video-container {
-    display: flex;
-    justify-content: center;
     position: relative;
     top:0 ;
     left: 0;

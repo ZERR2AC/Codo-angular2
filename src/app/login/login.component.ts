@@ -57,18 +57,25 @@ export class LoginComponent implements AfterViewInit {
 
             $(element).each(function () {
                 // var videoAspectRatio = $(this).data('height')/$(this).data('width');
-                var videoAspectRatio = 0.5;
+                var videoAspectRatio = 0.5625;
                 $(this).removeAttr("style").width(windowWidth);
                 var showVideoHeight = windowWidth * videoAspectRatio;
+                var showVideoWidth = -1;
 
                 if (showVideoHeight < windowHeight) {
                     $(this).removeAttr("style").height(windowHeight);
+                    showVideoWidth = windowHeight / videoAspectRatio;
                 }
 
-                if(windowWidth>2000){
+                if (windowWidth > 2000) {
                     $(this).removeAttr("style").width(windowWidth);
+                    showVideoWidth = windowWidth
                 }
 
+                if (showVideoWidth > windowWidth) {
+                    var left = ((windowWidth - showVideoWidth) / 2.0).toString()+'px';
+                    $(this).css('left', left);
+                }
 
 
                 $('.video-container video').addClass('fadeIn animated');
@@ -100,9 +107,9 @@ export class LoginComponent implements AfterViewInit {
                     if (res.ret == 0) {
                         //successful
                         $('.login-component-container').addClass('fadeOut animated');
-                        setTimeout(()=>{
+                        setTimeout(()=> {
                             this.router.navigate(['/']);
-                        },300)
+                        }, 300)
 
                     } else if (res.ret == 2) {
                         // password mismatch
