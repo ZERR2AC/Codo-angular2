@@ -22,8 +22,8 @@ export class CommonService {
     userToken2params():URLSearchParams{
         let currentUser = JSON.parse(localStorage.getItem('currentUser'));
         let params: URLSearchParams = new URLSearchParams();
-        if (currentUser && currentUser.token) {
-            params.set('token', currentUser.token);
+        if (currentUser && currentUser.user.token) {
+            params.set('token', currentUser.user.token);
         }
         return params;
     }
