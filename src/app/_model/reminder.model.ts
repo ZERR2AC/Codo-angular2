@@ -19,7 +19,7 @@ export class Reminder {
     id: number = null;
     priority: number = 0;
     type: number = 1;
-    creater_id: number = null;
+    creator_id: number = null;
     state: number = 0;
 
 }
