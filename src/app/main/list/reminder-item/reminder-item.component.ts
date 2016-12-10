@@ -6,11 +6,11 @@ import {Reminder} from "../../../_model/reminder.model";
 @Component({
     selector: 'reminder-item',
     templateUrl: 'reminder-item.component.html',
-    styleUrls: ['reminder-item.component.css', '../list.component.css','../../main.component.css']
+    styleUrls: ['reminder-item.component.css', '../list.component.css', '../../main.component.css']
 })
 
 
-export class ReminderItemComponent implements AfterViewInit {
+export class ReminderItemComponent implements AfterViewInit,AfterViewChecked {
 
     @Input()
     reminder: Reminder;
@@ -39,9 +39,9 @@ export class ReminderItemComponent implements AfterViewInit {
         this.datetimePicker.datetimepicker();
 
         var dtdate = this.datetimePicker.data("DateTimePicker");
-        if (this.reminder.due == undefined ||this.reminder.due == null) {
+        if (this.reminder.due == undefined || this.reminder.due == null) {
             //wrong due
-        }else{
+        } else {
             this.datetimePicker.data("DateTimePicker").date(this.reminder.due);
         }
 
@@ -55,11 +55,25 @@ export class ReminderItemComponent implements AfterViewInit {
         dtdate.defaultDate(false);
 
         //init textarea
+        // for auto increase textarea
+
         this.allTextArea = $(this.elementRef.nativeElement).find('.my-textarea');
         this.allTextArea.each(function () {
-            this.setAttribute('style', 'overflow-y:hidden;');
+            let self = this;
+            this.setAttribute('style', 'height:' + (this.scrollHeight) + 'px;overflow-y:hidden;');
+            setTimeout(()=> {
+                $(self).trigger('input');
+            }, 0);
+        }).on('input', function () {
+            this.style.height = 'auto';
+            this.style.height = (this.scrollHeight) + "px";
         });
 
+
+    }
+
+    ngAfterViewChecked(): void {
+        // this.allTextArea.trigger('input');
     }
 
 
@@ -79,10 +93,10 @@ export class ReminderItemComponent implements AfterViewInit {
         this.reminderUpdated.emit(this.reminder);
     }
 
-    changeReminderState(){
-        if(this.reminder.state==this.Reminder.UNDO){
+    changeReminderState() {
+        if (this.reminder.state == this.Reminder.UNDO) {
             this.reminder.state = this.Reminder.COMPLETED;
-        }else{
+        } else {
             this.reminder.state = this.Reminder.UNDO;
         }
         console.log(this.reminder.state);
