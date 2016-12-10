@@ -96,7 +96,7 @@ export class ReminderService {
         let currentUserId = JSON.parse(localStorage.getItem("currentUser")).user.id;
         var bodyParams = this.commonService.getBodyParams({});
 
-        if (currentUserId == reminder.creater_id) {
+        if (currentUserId == reminder.creator_id) {
             //my own
             bodyParams = this.commonService.getBodyParams({
                 'title': reminder.title,
