@@ -89,17 +89,35 @@ export class LoginComponent implements AfterViewInit {
     isInSignup: boolean = false;
     userNameUsedError: boolean = false;
     userNamePasswordMismatchError: boolean = false;
+    userNameEmptyError: boolean =false;
+    passwordEmptyError: boolean = false;
 
     constructor(private router: Router,
                 private authenticationService: AuthenticationService) {
     }
 
+    checkRequiredInfo(){
+        if (this.model.username == undefined || this.model.username == "") {
+            this.userNameEmptyError = true;
+            return false;
+        }
+        if (this.model.password == undefined || this.model.password == ""){
+            this.passwordEmptyError = true;
+            return false;
+        }
+        return true;
+    }
+
     loginButtonDidClick(): void {
+        if (!this.checkRequiredInfo()) {
+            return;
+        }
         this.login();
     }
 
     signToggleDidClick(): void {
         this.isInSignup = !this.isInSignup;
+        this.resetError();
         $(".animate-container").animateCss("animated bounceIn");
     }
 
@@ -124,6 +142,9 @@ export class LoginComponent implements AfterViewInit {
     }
 
     signupSubmit(): void {
+        if (!this.checkRequiredInfo()) {
+            return;
+        }
         this.authenticationService.signup(this.model.username, this.model.password)
             .subscribe((res)=> {
                     console.log("submit");
@@ -144,6 +165,8 @@ export class LoginComponent implements AfterViewInit {
     resetError(){
         this.userNameUsedError = false;
         this.userNamePasswordMismatchError = false;
+        this.passwordEmptyError = false;
+        this.userNameEmptyError = false;
     }
 
 }

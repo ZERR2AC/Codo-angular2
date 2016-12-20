@@ -16,20 +16,26 @@
         <!--sign up-->
         <div class="animate-container">
             <div *ngIf="isInSignup">
-                <div class="form-group" [ngClass]="{'has-error': userNameUsedError}">
+                <div class="form-group" [ngClass]="{'has-error': userNameEmptyError||userNameUsedError}">
                     <label class="control-label">Username</label>
                     <input type="text" name="username" [(ngModel)]="model.username"
                            required class="form-control" placeholder="your user name"
                            (input)="resetError()">
                     <span class="help-block" *ngIf="userNameUsedError">
                     Username already used.
-                </span>
+                    </span>
+                    <span class="help-block" *ngIf="userNameEmptyError">
+                    username can not be empty
+                    </span>
                 </div>
-                <div class="form-group">
+                <div class="form-group" [ngClass]="{'has-error': passwordEmptyError}">
                     <label class="control-label">Password</label>
                     <input type="password" name="password" [(ngModel)]="model.password"
                            required class="form-control" placeholder="your password"
-                           (keyup.enter)="signupSubmit()">
+                           (keyup.enter)="signupSubmit()" (input)="resetError()">
+                    <span class="help-block" *ngIf="passwordEmptyError">
+                    password can not be empty
+                    </span>
                 </div>
 
                 <div class="login-button-group text-center">
@@ -45,19 +51,25 @@
 
             <!--login-->
             <div *ngIf="!isInSignup">
-                <div class="form-group" [ngClass]="{'has-error': userNamePasswordMismatchError}">
+                <div class="form-group" [ngClass]="{'has-error': userNamePasswordMismatchError||userNameEmptyError}">
                     <label class="control-label">Username</label>
                     <input type="text" name="username" [(ngModel)]="model.username"
                            required class="form-control" placeholder="your user name"
                            (input)="resetError()">
+                    <span class="help-block" *ngIf="userNameEmptyError">
+                    Username can not be empty
+                    </span>
                 </div>
-                <div class="form-group" [ngClass]="{'has-error': userNamePasswordMismatchError}">
+                <div class="form-group" [ngClass]="{'has-error': userNamePasswordMismatchError||passwordEmptyError}">
                     <label class="control-label">Password</label>
                     <input type="password" name="password" [(ngModel)]="model.password"
                            required class="form-control" placeholder="your password"
                            (keyup.enter)="loginButtonDidClick()" (input)="resetError()">
                     <span class="help-block" *ngIf="userNamePasswordMismatchError">
-                    username or password mismatch.</span>
+                    username or password mismatch</span>
+                    <span class="help-block" *ngIf="passwordEmptyError">
+                    password can not be empty
+                    </span>
                 </div>
 
                 <div class="login-button-group text-center">
