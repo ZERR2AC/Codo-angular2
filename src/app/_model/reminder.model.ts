@@ -10,7 +10,7 @@ export class Reminder {
     PRIORITY_HIGH = 2;
     UNDO = 0;
     COMPLETED = 1;
-
+    channel = null;
     channel_id: number = null;
     title: string = "";
     content: string = "";

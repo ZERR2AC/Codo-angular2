@@ -118,7 +118,10 @@ export class ListComponent implements OnInit,AfterViewInit,AfterViewChecked {
                 var newReminder: Reminder = res.reminder;
                 var i = this.reminders.indexOf(tempReminder);
                 if (i != -1) {
-                    this.reminders[i] = newReminder;
+                    this.reminders[i].creator_id = newReminder.creator_id;
+                    this.reminders[i].channel = newReminder.channel;
+                    this.reminders[i].id= newReminder.id;
+                    // this.reminders[i] = newReminder;
                     console.log(this.reminders[i]);
                 }
             },

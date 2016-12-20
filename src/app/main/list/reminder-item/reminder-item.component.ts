@@ -65,7 +65,7 @@ export class ReminderItemComponent implements AfterViewInit {
                 $(self).trigger('input');
             }, 0);
         }).on('input', function () {
-            this.style.height = "1px";
+            this.style.height = 'auto';
             this.style.height = (this.scrollHeight) + "px";
         });
 
