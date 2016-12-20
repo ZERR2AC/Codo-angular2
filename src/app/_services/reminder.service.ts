@@ -110,9 +110,10 @@ export class ReminderService {
             bodyParams = this.commonService.getBodyParams({
                 'state': reminder.state
             });
-            if (reminder.remark != undefined) {
-                bodyParams.append('remark', reminder.remark);
-            }
+        }
+
+        if (reminder.remark != undefined) {
+            bodyParams.append('remark', reminder.remark);
         }
 
         let body = bodyParams.toString();
