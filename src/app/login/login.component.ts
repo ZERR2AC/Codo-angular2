@@ -73,7 +73,7 @@ export class LoginComponent implements AfterViewInit {
                 }
 
                 if (showVideoWidth > windowWidth) {
-                    var left = ((windowWidth - showVideoWidth) / 2.0).toString()+'px';
+                    var left = ((windowWidth - showVideoWidth) / 2.0).toString() + 'px';
                     $(this).css('left', left);
                 }
 
@@ -87,6 +87,8 @@ export class LoginComponent implements AfterViewInit {
 
     model: any = {};
     isInSignup: boolean = false;
+    userNameUsedError: boolean = false;
+    userNamePasswordMismatchError: boolean = false;
 
     constructor(private router: Router,
                 private authenticationService: AuthenticationService) {
@@ -113,6 +115,7 @@ export class LoginComponent implements AfterViewInit {
 
                     } else if (res.ret == 2) {
                         // password mismatch
+                        this.userNamePasswordMismatchError = true;
                     }
                 },
                 error => {
@@ -123,12 +126,14 @@ export class LoginComponent implements AfterViewInit {
     signupSubmit(): void {
         this.authenticationService.signup(this.model.username, this.model.password)
             .subscribe((res)=> {
+                    console.log("submit");
                     if (res.ret == 0) {
                         //successful
                         this.login();
                     } else if (res.ret == 1) {
                         // username already exist
                         console.log("already exist");
+                        this.userNameUsedError = true;
                     }
                 },
                 error => {
@@ -136,5 +141,9 @@ export class LoginComponent implements AfterViewInit {
                 });
     }
 
+    resetError(){
+        this.userNameUsedError = false;
+        this.userNamePasswordMismatchError = false;
+    }
 
 }

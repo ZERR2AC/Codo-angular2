@@ -98,7 +98,4 @@ export class ReminderItemComponent implements AfterViewInit {
         this.updateReminder();
     }
 
-    test() {
-        console.log('here');
-    }
 }
