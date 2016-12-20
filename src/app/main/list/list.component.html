@@ -7,9 +7,13 @@
         'reminder-priority-middle': newReminder.priority==Reminder.PRIORITY_MID,
         'reminder-priority-high': newReminder.priority==Reminder.PRIORITY_HIGH }"></span>
         </button>
+        <div [ngClass]="{'has-error': titleEmptyError}">
+            <input id="create-reminder-title" class="my-textinput reminder-title"
+                   [(ngModel)]="newReminder.title"
+                   placeholder="Create a new reminder"
+                   (input)="titleEmptyError=false"/>
+        </div>
 
-        <input id="create-reminder-title" class="my-textinput reminder-title" [(ngModel)]="newReminder.title"
-               placeholder="Create a new reminder"/>
         <!--detail-->
 
         <div class="create-reminder-collapse collapse-hide">

@@ -17,6 +17,7 @@ export class ListComponent implements OnInit,AfterViewInit,AfterViewChecked {
     reminders: Reminder[];
     newReminder: Reminder = new Reminder();
     myOwnChannels = [];
+    titleEmptyError = false;
     datetimepicker;
     allTextArea;
     elementRef: ElementRef;
@@ -97,6 +98,10 @@ export class ListComponent implements OnInit,AfterViewInit,AfterViewChecked {
     }
 
     submitNewReminder() {
+        if (this.newReminder.title == "") {
+            this.titleEmptyError = true;
+            return;
+        }
         this.newReminder.channel_id = $(".selectpicker").val();
         this.newReminder.type = this.newReminder.channel_id.toString() == 'null' ? 1 : 0;
 

@@ -174,3 +174,8 @@
     background-color: #03A9F4;
 }
 
+
+#create-reminder .has-error .reminder-title{
+    border: solid 2px #e74c3c !important;
+    border-radius: 10px;
+}
