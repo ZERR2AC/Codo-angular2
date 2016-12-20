@@ -9,17 +9,23 @@
         <h4>My channels</h4>
 
         <!-- new channel -->
-        <div class="input-group">
-            <input type="text" class="form-control"
-                   (keyup.enter)="createNewChannel()"
-                   placeholder="Create a channel"
-                   id="search-query-3"
-                   [(ngModel)]="newChannelName">
-            <span class="input-group-btn">
+        <div [ngClass]="{'has-error': channelNameAlreadyUserdError}">
+            <div class="input-group">
+                <input type="text" class="form-control"
+                       (keyup.enter)="createNewChannel()"
+                       placeholder="Create a channel"
+                       id="search-query-3"
+                       [(ngModel)]="newChannelName"
+                       (input)="channelNameAlreadyUserdError=false">
+                <span class="input-group-btn">
                 <button type="submit" class="btn" (click)="createNewChannel()">
                     <span class="fui-plus"></span>
                 </button>
             </span>
+            </div>
+            <div class="help-block" *ngIf="channelNameAlreadyUserdError">
+                channel name already existed, please change another name
+            </div>
         </div>
 
         <div class="channels-display">

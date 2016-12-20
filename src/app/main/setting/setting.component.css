@@ -31,3 +31,8 @@
     margin-bottom: 30px;
     margin-top: 20px;
 }
+
+.has-error .form-control + .input-group-btn button{
+    border-color: #e74c3c;
+    color: #e74c3c ;
+}

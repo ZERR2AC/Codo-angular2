@@ -17,6 +17,7 @@ export class SettingComponent implements OnInit {
 
     username: string = "";
     newChannelName: string = "";
+    channelNameAlreadyUserdError: boolean = false;
 
     ngOnInit(): void {
         this.getMyOwnChannels();
@@ -57,7 +58,7 @@ export class SettingComponent implements OnInit {
         );
     }
 
-    createNewChannel(){
+    createNewChannel() {
         this.channelService.createChannel(this.newChannelName).subscribe(
             //successful create
             res=> {
@@ -68,10 +69,11 @@ export class SettingComponent implements OnInit {
                 if (err.message == 1) {
                     console.log("channel name has benn used.");
                     //change the UI to show warning
-
+                    this.channelNameAlreadyUserdError = true;
                 }
             });
     }
+
     unsubscribeChannel(channel): void {
         channel.type = 0;
         let i = this.mySubcribedChannels.indexOf(channel);
