@@ -116,7 +116,6 @@ export class ReminderService {
         }
 
         let body = bodyParams.toString();
-        let self = this;
         return this.http.post(this.api_base + 'reminder/' + reminder.id, body,
             {
                 search: params,

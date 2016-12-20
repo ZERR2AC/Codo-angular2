@@ -1,4 +1,4 @@
-import {Component, OnInit, AfterViewChecked, AfterViewInit} from "@angular/core";
+import {Component, OnInit, AfterViewChecked, AfterViewInit, ElementRef, Inject} from "@angular/core";
 import {ReminderService} from "../../_services/reminder.service";
 import {Reminder} from "../../_model/reminder.model";
 import {ChannelService} from "../../_services/channel.service";
@@ -11,16 +11,20 @@ declare var $: any;
     styleUrls: ['list.component.css', '../main.component.css']
 })
 
-export class ListComponent implements OnInit,AfterViewInit {
+export class ListComponent implements OnInit,AfterViewInit,AfterViewChecked {
 
     private Reminder: Reminder = new Reminder();
     reminders: Reminder[];
     newReminder: Reminder = new Reminder();
     myOwnChannels = [];
     datetimepicker;
+    allTextArea;
+    elementRef: ElementRef;
 
     constructor(private reminderService: ReminderService,
-                private channelService: ChannelService) {
+                private channelService: ChannelService,
+                @Inject(ElementRef) elementRef: ElementRef) {
+        this.elementRef = elementRef
     }
 
 
@@ -43,6 +47,10 @@ export class ListComponent implements OnInit,AfterViewInit {
 
     }
 
+    ngAfterViewChecked(): void {
+        this.allTextArea.trigger('input');
+    }
+
     ngAfterViewInit(): void {
 
         //init new reminder due date picker
@@ -56,10 +64,14 @@ export class ListComponent implements OnInit,AfterViewInit {
         dtdate.useCurrent(false);
         dtdate.showClear(true);
 
-        //text area height after resize
-        let self = this;
-        $(window).on('resize', function () {
-            self.ngAfterViewChecked();
+        //init textarea
+        // for auto increase textarea
+        this.allTextArea = $(this.elementRef.nativeElement).find('.my-textarea');
+        this.allTextArea.each(function () {
+            this.setAttribute('style', 'height:34px;overflow-y:hidden;');
+        }).on('input', function () {
+            this.style.height = "1px";
+            this.style.height = (this.scrollHeight) + "px";
         });
 
         //new reminder collapse expand
@@ -101,7 +113,7 @@ export class ListComponent implements OnInit,AfterViewInit {
                 var newReminder: Reminder = res.reminder;
                 var i = this.reminders.indexOf(tempReminder);
                 if (i != -1) {
-                    this.reminders.splice(i, 1, newReminder);
+                    this.reminders[i] = newReminder;
                     console.log(this.reminders[i]);
                 }
             },
@@ -114,7 +126,7 @@ export class ListComponent implements OnInit,AfterViewInit {
                     this.datetimepicker.data("DateTimePicker").date(oldDateTimePickerValue);
                 }
             }
-        )
+        );
     }
 
     deleteReminder(reminder: Reminder) {
@@ -152,7 +164,4 @@ export class ListComponent implements OnInit,AfterViewInit {
         }
     }
 
-    test() {
-        console.log('hahaha');
-    }
 }

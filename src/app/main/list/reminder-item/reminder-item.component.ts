@@ -10,7 +10,7 @@ import {Reminder} from "../../../_model/reminder.model";
 })
 
 
-export class ReminderItemComponent implements AfterViewInit,AfterViewChecked {
+export class ReminderItemComponent implements AfterViewInit {
 
     @Input()
     reminder: Reminder;
@@ -65,17 +65,12 @@ export class ReminderItemComponent implements AfterViewInit,AfterViewChecked {
                 $(self).trigger('input');
             }, 0);
         }).on('input', function () {
-            this.style.height = 'auto';
+            this.style.height = "1px";
             this.style.height = (this.scrollHeight) + "px";
         });
 
 
     }
-
-    ngAfterViewChecked(): void {
-        // this.allTextArea.trigger('input');
-    }
-
 
     priorityBtnDidClick(reminder: Reminder) {
         reminder.priority += 1;
